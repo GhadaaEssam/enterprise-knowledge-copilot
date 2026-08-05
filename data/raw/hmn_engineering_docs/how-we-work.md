@@ -1,0 +1,25 @@
+# Source: https://engineering.hmn.md/how-we-work/
+
+# How We Work
+
+* [Team](https://engineering.hmn.md/how-we-work/team/)
+  + [Structure of the Engineering Discipline](https://engineering.hmn.md/how-we-work/team/structure/)
+  + [Career Progression](https://engineering.hmn.md/how-we-work/team/progression/)
+  + [Communication](https://engineering.hmn.md/how-we-work/team/communication/)
+  + [Guilds](https://engineering.hmn.md/how-we-work/team/guilds/)
+* [Tools we use](https://engineering.hmn.md/how-we-work/development-tools/)
+* [Philosophy](https://engineering.hmn.md/how-we-work/philosophy/)
+  + [Built to Last](https://engineering.hmn.md/how-we-work/philosophy/built-to-last/)
+  + [Modularity](https://engineering.hmn.md/how-we-work/philosophy/modularity/)
+  + [Complete Software](https://engineering.hmn.md/how-we-work/philosophy/completion/)
+* [Process](https://engineering.hmn.md/how-we-work/process/)
+  + [Architecture](https://engineering.hmn.md/how-we-work/process/architecture/)
+  + [Agile & Scrum](https://engineering.hmn.md/how-we-work/process/agile/)
+  + [Development Process](https://engineering.hmn.md/how-we-work/process/development/)
+  + [Code Reviews](https://engineering.hmn.md/how-we-work/process/reviews/)
+    - [Third Party Plugin Reviews](https://engineering.hmn.md/how-we-work/process/reviews/third-party-plugin-reviews/)
+  + [Deploys](https://engineering.hmn.md/how-we-work/process/deploys/)
+
+Accessed Wed, 15 Nov 2017 07:57:41 +0000 from `https://engineering.hmn.md/how-we-work/`
+
+[Made by Humans](https://hmn.md)

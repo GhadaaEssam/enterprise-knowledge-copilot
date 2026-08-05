@@ -1,0 +1,28 @@
+[project]
+name = "enterprise-knowledge-copilot"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Ghada Essam", email = "167557174+GhadaaEssam@users.noreply.github.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "beautifulsoup4>=4.15.0",
+    "crawl4ai>=0.9.2",
+    "jupyter>=1.1.1",
+    "markdownify>=1.2.3",
+    "minsearch>=0.2.0",
+    "openai>=2.52.0",
+    "python-dotenv>=1.2.2",
+    "requests>=2.34.2",
+    "sqlitesearch>=0.3.0",
+    "urllib3>=2.7.0",
+]
+
+[project.scripts]
+enterprise-knowledge-copilot = "enterprise_knowledge_copilot:main"
+
+[build-system]
+requires = ["uv_build>=0.12.1,<0.13.0"]
+build-backend = "uv_build"

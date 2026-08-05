@@ -1,0 +1,57 @@
+# Source: https://engineering.hmn.md/standards/backend/best-practices/
+
+# Best Practices
+
+## Programming Paradigms [#](#programming-paradigms)
+
+There are a few common programming paradigms used across the industry. Typically, these fall into three buckets: object-oriented, functional, and imperative. We do not strictly follow any particular paradigm, as the “best” technique is highly situational, and subjective.
+
+You should avoid trying to fit code into any particular paradigm without reference to the context in which it exists. Much of WordPress is written in an imperative style, and forcing object-oriented pieces into this is typically a mistake. Conversely, trying to shoehorn objects into a functional system can cause problems.
+
+Generally, we lean towards functional and imperative code, using object-oriented programming when working with real objects. We avoid many object-oriented practices and patterns that lead to overabstraction, including factories and singletons. (These practices are useful in some contexts, but their use should be carefully considered.)
+
+Often, these practices involve using object structures for functionality that isn’t truly based around objects, and this leads to less maintainable code. These practices spread as cargo-cult programming, where the practices can be followed without fully understanding the reasoning for them in the first place.
+
+Before using any particular paradigm, understand how it is used, and when it is beneficial to use. If you’re truly working with objects (such as posts), then an object-oriented style is likely to fit best, but your default should not be to make code object-oriented if it does not need to be.
+
+### The “Main” Class [#](#the-main-class)
+
+WordPress plugins in the wider community typically have a “main class”. This class contains methods that perform actions like initialising actions and filters, setting up admin UI, or interacting with templates. Often, they will include unrelated utility functions as well. This class typically follows a singleton pattern, with a `get_instance()` method which uses a private `$instance` variable.
+
+Practically speaking, there is no need to use a class at all here. You will never have more than one instance of that class (in fact, doing so would cause issues), nor will you ever extend the class. It also fails to encapsulate any functionality, as these typically end up including code that interacts with almost every part of WordPress, failing to ensure [modularity](/how-we-work/philosophy/modularity/).
+
+This pattern evolved over time from PHP 5.2-style code, where classes were used as a form of faux-namespacing. These often had static methods which were used as namespaced functions. Over time, this evolved to singleton instances, as it’s seen as a more pure form of object-oriented code. This spread through the community as people followed “best practices” of published code by other developers, but without considering the underlying reasoning and evolution.
+
+These main classes are best replaced with namespaced functions, as they are functional/imperative pieces of code. Typically, plugins should consist of a primary namespace (in a [namespace file](/standards/structure/)) with bootstrapping code, plugin-wide constants, and common utilities. These can then be hooked into WordPress in the [main file](/standards/structure/).
+
+### The Singleton Pattern [#](#the-singleton-pattern)
+
+The singleton pattern is a pattern where you have an object which typically only has a single instance. While the singleton pattern is useful, there can be a tendency to overuse the singleton pattern when working with faux-object-oriented programming. This can come from a desire to have code in classes to meet OOP requirements, while having the ability to get to the instance.
+
+When considering implementing a singleton, consider whether the class is really modelling an object or not. Singletons should be used when modelling an object which just happens to have a single instance; for example, a database connection (like `wpdb`) models an object, but only a single instance is needed. If you are not encapsulating any state, namespaced functions are a better solution.
+
+If the solution to your problem is truly to use a singleton, you should typically separate the singleton code from the class. Use a namespaced function which stores the instance in a `static` or `global` variable. This ensures that the object remains reusable, and that the singleton pattern exists purely as a guide instead.
+
+## Global State [#](#global-state)
+
+Global state is any variable that persists throughout a request. Global state exists both throughout WordPress code and our own code. While global state may be contained in global variables (that is, `$GLOBALS` or `global $var`), it can also exist in other places, including inside object instances.
+
+Where you can, you should reduce global state and ensure it is manageable. Typically, only primary/authoritative data should be stored in global state, while derived data can be regenerated from this. For example, system configuration (like post types) is authoritative, while UI or functionality using those types is derived. Derived data may be [cached](/standards/backend/caching/) (rather than stored) for performance considerations, but consider whether it is worth it first.
+
+You do **not** need to avoid global variables, and often they are a great choice for global state. Using an object property (or static class property) is not necessarily better than a global variable, and can often make testing harder. Additionally, object properties need to be stored in an object, which then itself needs to be stored in global state.
+
+You may want to avoid `static` variables (which are not the same as static class properties), which are stored only in the context of the specific function. These can become tough to invalidate or otherwise manage during testing.
+
+## Visibility [#](#visibility)
+
+Balance the visibility of your functions, and ensure they can be reused in the future. While it may be tempting to make every class method `private` by default, this can make it much harder to reuse the code, and can lead to copy-and-paste when overriding the class.
+
+Visibility hints are intended as hints, not as a security measure. They indicate to other developers what the public API of your class should be, and that they may want to look at using a different method, but should not be used to artificially restrict code. At the end of the day, if the visibility is too strict, this hurts productivity and long-term maintainability of the project.
+
+Typically, the strictest visibility you need in your codebase is `protected`. This hints that a method is intended for use inside the class only, while allowing subclasses to override or reuse that method.
+
+Publicly-published reusable plugins may want to use slightly stricter visibility to ensure forwards-compatibility. Having visibility too public may lock down the implementation and create headaches in the future.
+
+Accessed Mon, 26 Feb 2018 10:02:33 +0000 from `https://engineering.hmn.md/standards/backend/best-practices/`
+
+[Made by Humans](https://hmn.md)
