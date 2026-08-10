@@ -39,7 +39,7 @@ class RAGBase:
         llm_client,
         instructions=INSTRUCTIONS,
         prompt_template=PROMPT_TEMPLATE,
-        model="openai/gpt-oss-20b"
+        model="llama-3.1-8b-instant"
     ):
         self.index = index
         self.llm_client = llm_client
@@ -47,30 +47,16 @@ class RAGBase:
         self.prompt_template = prompt_template
         self.model = model
 
-    def search(self, query, num_results=3):
-        boost_dict = {
-            "title": 2.0,
-            "text": 1.0,
-            "category": 0.3
-        }
-
-        return self.index.search(
-            query,
-            num_results=num_results,
-            boost_dict=boost_dict,
-        )
-    
-    def build_context(self, search_results):
+    def build_context(self, search_results: list) -> str:
         sections = []
-
         for doc in search_results:
-            sections.append(
-            f""" Document: {doc['title']}
-            Category: {doc['category']}
-            Source: {doc['source']}
+            title = doc.get("title", "Untitled")
+            category = doc.get("category", "N/A")
+            source = doc.get("source", "N/A")
+            text = doc.get("text", "")
 
-            {doc['text']}
-            """
+            sections.append(
+                f"Document: {title}\nCategory: {category}\nSource: {source}\n\n{text}"
             )
 
         return "\n\n---\n\n".join(sections)
@@ -80,8 +66,8 @@ class RAGBase:
         return self.prompt_template.format(
             question=query, context=context
         )
-    
-    def llm(self, prompt):
+
+    def generate_response(self, prompt: str) -> str:
         input_messages = [
             {"role": "developer", "content": self.instructions},
             {"role": "user", "content": prompt}
@@ -94,8 +80,7 @@ class RAGBase:
 
         return response.output_text
 
-    def ask(self, query, num_results=3):
-        search_results = self.search(query, num_results=num_results)
+    def ask(self, query: str, num_results: int = 5) -> str:
+        search_results = self.search_engine.search(query, num_results=num_results)
         prompt = self.build_prompt(query, search_results)
-        answer = self.llm(prompt)
-        return answer
+        return self.generate_response(prompt)
