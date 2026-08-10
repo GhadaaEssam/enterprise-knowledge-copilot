@@ -7,49 +7,56 @@ INTERNAL_SEARCH_SCHEMA = {
     "type": "function",
     "function": {
         "name": "search_internal_documentation",
-        "description": "Searches internal company documentation, technical guides, standards, and private knowledge bases.",
+        "description": (
+            "PRIMARY knowledge source. Searches the company's internal "
+            "documentation, engineering guides, standards, processes, "
+            "technical documentation, and private knowledge base. "
+            "Use this tool FIRST for questions that may be answered "
+            "by internal documentation. Prefer this tool over web search "
+            "when the answer may exist in the company's documentation."
+        ),       
         "parameters": {
             "type": "object",
             "properties": {
                 "query": {
                     "type": "string",
-                    "description": "Keywords or specific question to search within internal documentation.",
-                },
-                "num_results": {
-                    "type": "integer",
-                    "description": "Number of documentation chunks to retrieve (default: 5).",
-                    "default": 5,
+                    "description": (
+                        "Keywords or a specific question "
+                        "to search within internal documentation."
+                    ),
                 },
             },
             "required": ["query"],
         },
     },
 }
-
 
 WEB_SEARCH_SCHEMA = {
     "type": "function",
     "function": {
         "name": "search_web",
-        "description": "Searches the live public internet for recent information, external news, public facts, or general knowledge.",
+        "description": (
+            "SECONDARY knowledge source. Searches the public internet "
+            "for current or external information. Use ONLY when the user "
+            "explicitly requests web information, when current information "
+            "is required, or when internal documentation does not contain "
+            "enough information to answer the question."
+        ),
         "parameters": {
             "type": "object",
             "properties": {
                 "query": {
                     "type": "string",
-                    "description": "The search query to look up on the web.",
-                },
-                "num_results": {
-                    "type": "integer",
-                    "description": "Number of web search results to retrieve (default: 5).",
-                    "default": 5,
+                    "description": (
+                        "Keywords or a specific question "
+                        "to search on the web."
+                    ),
                 },
             },
             "required": ["query"],
         },
     },
 }
-
 
 class ToolRegistry:
 

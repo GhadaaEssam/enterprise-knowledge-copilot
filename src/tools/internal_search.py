@@ -15,7 +15,7 @@ class InternalSearchTool:
 
     def __init__(
         self,
-        db_path: str = "data/db/hnm.db",
+        db_path: str = "notebooks/hnm.db",
         search_engine: Optional[KeywordSearchEngine] = None,
     ):
         # Use provided instance or instantiate directly from SQLite DB path

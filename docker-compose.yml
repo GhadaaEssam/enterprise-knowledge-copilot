@@ -1,0 +1,20 @@
+services:
+  knowledge-copilot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: enterprise-knowledge-copilot
+
+    ports:
+      - "8501:8501"
+
+    env_file:
+      - .env
+
+    volumes:
+      - ./data/db:/app/data/db
+      - ./data/monitoring:/app/data/monitoring
+      - ./notebooks/hnm.db:/app/notebooks/hnm.db
+
+    restart: unless-stopped
