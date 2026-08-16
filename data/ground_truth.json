@@ -6988,5 +6988,401 @@
     "target_chunk_id": "how-we-work_style_react_chunk_20",
     "target_document_id": "how-we-work_style_react",
     "expected_output": "    // By default, propTypes arguments are optional:\n    optionalArray: PropTypes.array,\n    optionalBool: PropTypes.bool,\n    optionalFunc: PropTypes.func,\n    // Mark required properties with .isRequired:\n    requiredString: PropTypes.string.isRequired,\n    requiredObject: PropTypes.shape( {\n        rendered: PropTypes.string.isRequired,\n    } ).isRequired,\n};\n```\nAvoid duplicating child `propTypes`. If you are passing data through to a child component, you can refer to that component's `.propTypes` property to avoid re-declaring the same definitions:\n```\nParentComponent.propTypes = {\n    titleForChild: ChildComponent.propTypes.title,\n};\n```\nIf you have a `propTypes` definition that is used across many components such as the shape of a specific API object, you may move that into a module of its own and import that module into each component where it is used to keep the definitions in sync.\n`propTypes` can only do their job if they are specific. Avoid these non-descriptive prop-types:\n* `PropTypes.any`\n* `PropTypes.array`\n* `PropTypes.object`\nInstead, use\n* `PropTypes.arrayOf`\n* `PropTypes.objectOf`\n* `PropTypes.instanceOf`\n* `PropTypes.shape`"
+  },
+  {
+    "question": "What are the alternative PropTypes methods?",
+    "target_chunk_id": "how-we-work_style_react_chunk_21",
+    "target_document_id": "how-we-work_style_react",
+    "expected_output": "* `PropTypes.array`\n* `PropTypes.object`\nInstead, use\n* `PropTypes.arrayOf`\n* `PropTypes.objectOf`\n* `PropTypes.instanceOf`\n* `PropTypes.shape`\nAs a rare exception, if you are passing data through to a child component and *truly* cannot predict what type it will be, you may use `PropType.any`.\nSee the [`prop-types` README](https://href.li/?https://github.com/facebook/prop-types) for more documentation."
+  },
+  {
+    "question": "What is the recommended approach when passing unpredictable data to a child component?",
+    "target_chunk_id": "how-we-work_style_react_chunk_21",
+    "target_document_id": "how-we-work_style_react",
+    "expected_output": "* `PropTypes.array`\n* `PropTypes.object`\nInstead, use\n* `PropTypes.arrayOf`\n* `PropTypes.objectOf`\n* `PropTypes.instanceOf`\n* `PropTypes.shape`\nAs a rare exception, if you are passing data through to a child component and *truly* cannot predict what type it will be, you may use `PropType.any`.\nSee the [`prop-types` README](https://href.li/?https://github.com/facebook/prop-types) for more documentation."
+  },
+  {
+    "question": "What should you avoid storing in the DOM?",
+    "target_chunk_id": "how-we-work_style_react_chunk_22",
+    "target_document_id": "how-we-work_style_react",
+    "expected_output": "### Do not store state in the DOM\nDo not use `data-` attributes or classes. All information should be stored in JavaScript, either in the React component itself, or in a React store if using a framework such as Redux.\nIf you need to pass data to the frontend from PHP, prefer `wp_localize_script` to write that data to a global object instead of embedding the information in `data-` attributes.\n---"
+  },
+  {
+    "question": "What is a better alternative to passing data to the frontend from PHP?",
+    "target_chunk_id": "how-we-work_style_react_chunk_22",
+    "target_document_id": "how-we-work_style_react",
+    "expected_output": "### Do not store state in the DOM\nDo not use `data-` attributes or classes. All information should be stored in JavaScript, either in the React component itself, or in a React store if using a framework such as Redux.\nIf you need to pass data to the frontend from PHP, prefer `wp_localize_script` to write that data to a global object instead of embedding the information in `data-` attributes.\n---"
+  },
+  {
+    "question": "What are the key libraries and components used in this context?",
+    "target_chunk_id": "how-we-work_style_react_chunk_23",
+    "target_document_id": "how-we-work_style_react",
+    "expected_output": "## Libraries and components"
+  },
+  {
+    "question": "Can you provide more information about the specific libraries and components mentioned?",
+    "target_chunk_id": "how-we-work_style_react_chunk_23",
+    "target_document_id": "how-we-work_style_react",
+    "expected_output": "## Libraries and components"
+  },
+  {
+    "question": "What is the recommended approach for managing data in this context?",
+    "target_chunk_id": "how-we-work_style_react_chunk_24",
+    "target_document_id": "how-we-work_style_react",
+    "expected_output": "### Do not use Backbone models\nUse Redux actions, or `fetch()` directly instead."
+  },
+  {
+    "question": "What should be avoided when working with data in this application?",
+    "target_chunk_id": "how-we-work_style_react_chunk_24",
+    "target_document_id": "how-we-work_style_react",
+    "expected_output": "### Do not use Backbone models\nUse Redux actions, or `fetch()` directly instead."
+  },
+  {
+    "question": "What is the recommended approach for DOM manipulation?",
+    "target_chunk_id": "how-we-work_style_react_chunk_25",
+    "target_document_id": "how-we-work_style_react",
+    "expected_output": "### Minimize use of jQuery\n*Never* use jQuery for DOM manipulation.\nTry to avoid using jQuery plugins. When necessary, wrap the jQuery plugin with a React component so you only have to touch the jQuery once.\nFor Ajax, the native `fetch()` API (with [polyfill](https://href.li/?https://github.com/github/fetch)) should be used instead of `$.ajax`."
+  },
+  {
+    "question": "What should be used instead of $.ajax for making Ajax requests?",
+    "target_chunk_id": "how-we-work_style_react_chunk_25",
+    "target_document_id": "how-we-work_style_react",
+    "expected_output": "### Minimize use of jQuery\n*Never* use jQuery for DOM manipulation.\nTry to avoid using jQuery plugins. When necessary, wrap the jQuery plugin with a React component so you only have to touch the jQuery once.\nFor Ajax, the native `fetch()` API (with [polyfill](https://href.li/?https://github.com/github/fetch)) should be used instead of `$.ajax`."
+  },
+  {
+    "question": "What coding standards do we follow for PHP?",
+    "target_chunk_id": "how-we-work_style_php_chunk_1",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "# PHP\nUnless otherwise mentioned here, we follow the [WordPress style guidelines](https://href.li/?https://make.wordpress.org/core/handbook/best-practices/coding-standards/php/).\nWe also have our own standards for things that aren't covered by the WP style guidelines, such as namespacing and general project structure.\nCode can be checked against these coding standards using the [phpcs coding standards configuration](https://href.li/?https://github.com/humanmade/coding-standards), available via Composer as [`humanmade/coding-standards`](https://href.li/?https://packagist.org/packages/humanmade/coding-standards)."
+  },
+  {
+    "question": "How can code be checked against these coding standards?",
+    "target_chunk_id": "how-we-work_style_php_chunk_1",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "# PHP\nUnless otherwise mentioned here, we follow the [WordPress style guidelines](https://href.li/?https://make.wordpress.org/core/handbook/best-practices/coding-standards/php/).\nWe also have our own standards for things that aren't covered by the WP style guidelines, such as namespacing and general project structure.\nCode can be checked against these coding standards using the [phpcs coding standards configuration](https://href.li/?https://github.com/humanmade/coding-standards), available via Composer as [`humanmade/coding-standards`](https://href.li/?https://packagist.org/packages/humanmade/coding-standards)."
+  },
+  {
+    "question": "What is the general rule for PHP file layout in plugins/themes?",
+    "target_chunk_id": "how-we-work_style_php_chunk_2",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "## File Layout\nPHP files should **either** declare symbols (classes, functions, etc) **or** run code (function calls, etc), but not both. Generally speaking, only one file per plugin/theme should contain run code.\nAn exception is allowed for `require` statements only if there isn't a better way to include those files. As an example, a namespace file may include the namespace file for subnamespaces, since PHP doesn't have a way to autoload namespaced functions.\nClasses should be in their own file, which should not declare any other functions or classes, or run any code.\nGenerally, the file should follow the following order:\n* `namespace` declaration\n* `use` declarations\n* `const` declarations for the namespace\n* `require` when allowed\n* Declarations or run code\nFor namespaced functions which are primarily action and filter callbacks, the `add_action`/`add_filter` calls should generally live in a `bootstrap()` function in the namespace. This allows the file to be loaded without adding hooks immediately, but still allows the hook declarations to live with the callbacks."
+  },
+  {
+    "question": "What is the purpose of the `bootstrap()` function in namespaced functions?",
+    "target_chunk_id": "how-we-work_style_php_chunk_2",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "## File Layout\nPHP files should **either** declare symbols (classes, functions, etc) **or** run code (function calls, etc), but not both. Generally speaking, only one file per plugin/theme should contain run code.\nAn exception is allowed for `require` statements only if there isn't a better way to include those files. As an example, a namespace file may include the namespace file for subnamespaces, since PHP doesn't have a way to autoload namespaced functions.\nClasses should be in their own file, which should not declare any other functions or classes, or run any code.\nGenerally, the file should follow the following order:\n* `namespace` declaration\n* `use` declarations\n* `const` declarations for the namespace\n* `require` when allowed\n* Declarations or run code\nFor namespaced functions which are primarily action and filter callbacks, the `add_action`/`add_filter` calls should generally live in a `bootstrap()` function in the namespace. This allows the file to be loaded without adding hooks immediately, but still allows the hook declarations to live with the callbacks."
+  },
+  {
+    "question": "What is the naming convention for files containing a class in WordPress?",
+    "target_chunk_id": "how-we-work_style_php_chunk_3",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "## File Naming\nNamespaces are mapped to filesystem directories after lowercasing. Part of the namespace may be excluded from the directory structure, ala PSR-4. For example, classes and functions in the `HM\\Some\\Example` could live in the `base/hm/some/example` directory, or the `HM` could be excluded for `base/some/example`.\nFiles containing a class should be named `class-.php`, all lowercase, to fit with the WordPress coding standards.\nThe main file for plugins should live in `plugin.php` in the plugin's directory, while the main file for themes is `functions.php` in the theme directory. This file should be the only one to contain run code. This file should also register necessary autoloaders.\nUnderneath the top-level directory (either the plugin directory or the theme directory) should be an `inc` directory which represents the top-level namespace for the plugin/theme."
+  },
+  {
+    "question": "What is the recommended main file for plugins in WordPress?",
+    "target_chunk_id": "how-we-work_style_php_chunk_3",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "## File Naming\nNamespaces are mapped to filesystem directories after lowercasing. Part of the namespace may be excluded from the directory structure, ala PSR-4. For example, classes and functions in the `HM\\Some\\Example` could live in the `base/hm/some/example` directory, or the `HM` could be excluded for `base/some/example`.\nFiles containing a class should be named `class-.php`, all lowercase, to fit with the WordPress coding standards.\nThe main file for plugins should live in `plugin.php` in the plugin's directory, while the main file for themes is `functions.php` in the theme directory. This file should be the only one to contain run code. This file should also register necessary autoloaders.\nUnderneath the top-level directory (either the plugin directory or the theme directory) should be an `inc` directory which represents the top-level namespace for the plugin/theme."
+  },
+  {
+    "question": "What is the recommended file naming strategy for namespaces with classes or sub-namespaces?",
+    "target_chunk_id": "how-we-work_style_php_chunk_4",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "### Namespaced File Naming\nNamespaced functions and constants should live in `namespace.php` in the namespace's directory or in a file named `{namespace}.php` in the parent namespace's directory.\nChoosing the correct namespace naming strategy is important for project organization. Going the `namespace.php` route is standardized and simple, but commonly leads to a collection of un-associated functions, reducing discoverability and clarity. Alternatively, going with `{namespace}.php` will improve discoverability but can lead to many small files which can become difficult to maintain as time goes on. Both philosophies have their place and use.\nGenerally speaking, if you have classes or sub-namespaces within a namespace, you should use `namespace.php`. This ensures that the code within a namespace lives together in a single directory. Consider using `{namespace}.php` for standalone namespaces with only functions.\nAs an example, for a plugin called \"hm-coffee\" with a namespace of `HM\\Coffee`, the directory structure should look like this:\n* `plugin.php` - Declares autoloader for `HM\\Coffee` and runs bootstrap functions\n* `inc/` - Contains PHP code for `HM\\Coffee` namespace"
+  },
+  {
+    "question": "When should you consider using {namespace}.php for a namespace?",
+    "target_chunk_id": "how-we-work_style_php_chunk_4",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "### Namespaced File Naming\nNamespaced functions and constants should live in `namespace.php` in the namespace's directory or in a file named `{namespace}.php` in the parent namespace's directory.\nChoosing the correct namespace naming strategy is important for project organization. Going the `namespace.php` route is standardized and simple, but commonly leads to a collection of un-associated functions, reducing discoverability and clarity. Alternatively, going with `{namespace}.php` will improve discoverability but can lead to many small files which can become difficult to maintain as time goes on. Both philosophies have their place and use.\nGenerally speaking, if you have classes or sub-namespaces within a namespace, you should use `namespace.php`. This ensures that the code within a namespace lives together in a single directory. Consider using `{namespace}.php` for standalone namespaces with only functions.\nAs an example, for a plugin called \"hm-coffee\" with a namespace of `HM\\Coffee`, the directory structure should look like this:\n* `plugin.php` - Declares autoloader for `HM\\Coffee` and runs bootstrap functions\n* `inc/` - Contains PHP code for `HM\\Coffee` namespace"
+  },
+  {
+    "question": "What does the `plugin.php` file do in the HM\\Coffee namespace?",
+    "target_chunk_id": "how-we-work_style_php_chunk_5",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "* `plugin.php` - Declares autoloader for `HM\\Coffee` and runs bootstrap functions\n* `inc/` - Contains PHP code for `HM\\Coffee` namespace\n+ `namespace.php` - Declares functions and constants in the `HM\\Coffee` namespace\n+ `class-cup.php` - Declares the `HM\\Coffee\\Cup` class\n+ `beans.php` - Declares functions and constants in the `HM\\Coffee\\Beans` namespace\n+ `sweeteners/` - Contains sub-namespace `HM\\Coffee\\Sweeteners`\n- `namespace.php` - Declares functions and constants in the `HM\\Coffee\\Sweeteners` namespace\n- `class-sugar.php` - Declares the `HM\\Coffee\\Sweeteners\\Sugar` class"
+  },
+  {
+    "question": "What classes are declared in the `inc/` directory?",
+    "target_chunk_id": "how-we-work_style_php_chunk_5",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "* `plugin.php` - Declares autoloader for `HM\\Coffee` and runs bootstrap functions\n* `inc/` - Contains PHP code for `HM\\Coffee` namespace\n+ `namespace.php` - Declares functions and constants in the `HM\\Coffee` namespace\n+ `class-cup.php` - Declares the `HM\\Coffee\\Cup` class\n+ `beans.php` - Declares functions and constants in the `HM\\Coffee\\Beans` namespace\n+ `sweeteners/` - Contains sub-namespace `HM\\Coffee\\Sweeteners`\n- `namespace.php` - Declares functions and constants in the `HM\\Coffee\\Sweeteners` namespace\n- `class-sugar.php` - Declares the `HM\\Coffee\\Sweeteners\\Sugar` class"
+  },
+  {
+    "question": "What is the purpose of a namespace in a feature-oriented approach?",
+    "target_chunk_id": "how-we-work_style_php_chunk_6",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "## Namespace and Class Naming\nNamespaces should be logical groupings of related functionality. Typically, this means along feature lines, not along technology lines. That is, `HM\\Project\\Reports` with a `Command` class for CLI, rather than `HM\\CLI` with a `ProjectReportsCommand` class.\nReusable code can be prefixed with `HM\\`, or can use a project namespace (such as `Mercator\\`) if it has a project name. Project names starting with \"hm-\" should be sub-namespaces of `HM\\`: if the project is called \"hm-something\", the namespace should be `HM\\Something`.\nClient projects or products should generally use their own namespace (e.g. `AwesomeClient\\`) rather than under the HM namespace.\nNamespaces may be named with CamelCase, as `_` is historically used as a faux namespace separator. You may avoid underscores in favour of camelisation (heh) **as long as the project is consistent**."
+  },
+  {
+    "question": "What are the guidelines for naming reusable code in a project?",
+    "target_chunk_id": "how-we-work_style_php_chunk_6",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "## Namespace and Class Naming\nNamespaces should be logical groupings of related functionality. Typically, this means along feature lines, not along technology lines. That is, `HM\\Project\\Reports` with a `Command` class for CLI, rather than `HM\\CLI` with a `ProjectReportsCommand` class.\nReusable code can be prefixed with `HM\\`, or can use a project namespace (such as `Mercator\\`) if it has a project name. Project names starting with \"hm-\" should be sub-namespaces of `HM\\`: if the project is called \"hm-something\", the namespace should be `HM\\Something`.\nClient projects or products should generally use their own namespace (e.g. `AwesomeClient\\`) rather than under the HM namespace.\nNamespaces may be named with CamelCase, as `_` is historically used as a faux namespace separator. You may avoid underscores in favour of camelisation (heh) **as long as the project is consistent**."
+  },
+  {
+    "question": "What is the purpose of using a `use` statement at the top of a namespaced file?",
+    "target_chunk_id": "how-we-work_style_php_chunk_7",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "Classes used in a namespaced file should have a `use` statement at the top of the file to allow a quick overview of what is used, and to avoid long absolute references to the classes throughout the file. If you have a lot of functionality from given namespace, you can `use` the entire namespace to avoid excessive `use` statements.\n`use` statements should never start with a `\\`; these are not required, as the namespaces here are already absolute.\n```\n// No:\n$x = \\HM\\Some\\Thing::method();\n\n// No:\nuse \\HM\\Some\\Thing;\n$x = Thing::method();\n\n// Yes:\nuse HM\\Some\\Thing;\n$x = Thing::method();\n\n// Allowed:\nuse HM\\Some;\n\n$x = Some\\Thing::method();\n$y = Some\\Other::thing();\n```"
+  },
+  {
+    "question": "How should `use` statements be formatted in a namespaced file?",
+    "target_chunk_id": "how-we-work_style_php_chunk_7",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "Classes used in a namespaced file should have a `use` statement at the top of the file to allow a quick overview of what is used, and to avoid long absolute references to the classes throughout the file. If you have a lot of functionality from given namespace, you can `use` the entire namespace to avoid excessive `use` statements.\n`use` statements should never start with a `\\`; these are not required, as the namespaces here are already absolute.\n```\n// No:\n$x = \\HM\\Some\\Thing::method();\n\n// No:\nuse \\HM\\Some\\Thing;\n$x = Thing::method();\n\n// Yes:\nuse HM\\Some\\Thing;\n$x = Thing::method();\n\n// Allowed:\nuse HM\\Some;\n\n$x = Some\\Thing::method();\n$y = Some\\Other::thing();\n```"
+  },
+  {
+    "question": "What are the guidelines for importing functions in PHP?",
+    "target_chunk_id": "how-we-work_style_php_chunk_8",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "### Namespace and Function Imports\nThe PHP language allows for functionality to be imported and aliased from external namespaces via the `use` operator in order to avoid writing longer, fully qualified names. It is important to be clear when referencing external functionality so that it is obvious where various functionality is defined. To better distinguish the use of external functionality, the following guidelines should be observed:\n* Importing functions explicitly with `use function` should be avoided.\n* Aliasing functions explicitly with `use function ... as` should also be avoided.\n* Parent namespaces are preferred for importing functions.\n* Aliasing namespaces is acceptable, as long as the renaming is kept close to the original. For example `use HM\\Block\\Helpers as BlockHelpers`\nThe above are not hard rules, but serve as a general guideline so dependencies\ncan be easily tracked from within the code.\n```\n// No:\nuse function HM\\Some\\thing;\nthing();\n\n// No:\nuse function HM\\Some\\thing as other_thing;\nother_thing();\n\n// Encouraged:\nuse HM\\Some;\nSome\\thing();\n\n// Allowed:\nuse HM\\Some\\Longer\\Namespace as LongerNamespace;\nLongerNamespace\\thing();\n```"
+  },
+  {
+    "question": "What is the preferred way to import functions in PHP?",
+    "target_chunk_id": "how-we-work_style_php_chunk_8",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "### Namespace and Function Imports\nThe PHP language allows for functionality to be imported and aliased from external namespaces via the `use` operator in order to avoid writing longer, fully qualified names. It is important to be clear when referencing external functionality so that it is obvious where various functionality is defined. To better distinguish the use of external functionality, the following guidelines should be observed:\n* Importing functions explicitly with `use function` should be avoided.\n* Aliasing functions explicitly with `use function ... as` should also be avoided.\n* Parent namespaces are preferred for importing functions.\n* Aliasing namespaces is acceptable, as long as the renaming is kept close to the original. For example `use HM\\Block\\Helpers as BlockHelpers`\nThe above are not hard rules, but serve as a general guideline so dependencies\ncan be easily tracked from within the code.\n```\n// No:\nuse function HM\\Some\\thing;\nthing();\n\n// No:\nuse function HM\\Some\\thing as other_thing;\nother_thing();\n\n// Encouraged:\nuse HM\\Some;\nSome\\thing();\n\n// Allowed:\nuse HM\\Some\\Longer\\Namespace as LongerNamespace;\nLongerNamespace\\thing();\n```"
+  },
+  {
+    "question": "What are Yoda conditions?",
+    "target_chunk_id": "how-we-work_style_php_chunk_9",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "## Yoda Conditions\nYoda conditions are confusing and solve the wrong problem. You have my permission to not use Yoda conditions. - RM"
+  },
+  {
+    "question": "Why are Yoda conditions considered to solve the wrong problem?",
+    "target_chunk_id": "how-we-work_style_php_chunk_9",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "## Yoda Conditions\nYoda conditions are confusing and solve the wrong problem. You have my permission to not use Yoda conditions. - RM"
+  },
+  {
+    "question": "What is the correct syntax for defining an anonymous function in PHP?",
+    "target_chunk_id": "how-we-work_style_php_chunk_10",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "## Anonymous Functions (Closures)\n`function` should be followed with a space, as should `use`.\n```\n// No:\nfunction() {}\nfunction( $x ) {}\nfunction( $x ) use( $y ) {}\nfunction( $x ) use ( $y ) {}\n\n// Yes:\nfunction () {}\nfunction ( $x ) {}\nfunction ( $x ) use ( $y ) {}\n```\nWhen passing an anonymous function as an argument, if it is the last parameter, you can compress the closing braces and parenthesis without a space:\n```\narray_map( $list, function ( $item ) {\n    return $item->title;\n}); // Space not required between brace and parenthesis.\n```\nHowever, you cannot do this if it is not the last parameter.\n```\nadd_action( 'init', function () {\n    call_func();\n}, 10 ); // Space required after 10\n```\n(Note that this rule applies also to standard function calls; you can have `));` for nested function calls or `]);` for short arrays in a function call.)\nGenerally speaking, you should avoid using anonymous functions for actions and filters. These aren't possible to unhook neatly, and with namespaces you don't need to worry about the global namespace pollution of one-function-per-hook."
+  },
+  {
+    "question": "When is it acceptable to compress the closing braces and parenthesis of an anonymous function in PHP?",
+    "target_chunk_id": "how-we-work_style_php_chunk_10",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "## Anonymous Functions (Closures)\n`function` should be followed with a space, as should `use`.\n```\n// No:\nfunction() {}\nfunction( $x ) {}\nfunction( $x ) use( $y ) {}\nfunction( $x ) use ( $y ) {}\n\n// Yes:\nfunction () {}\nfunction ( $x ) {}\nfunction ( $x ) use ( $y ) {}\n```\nWhen passing an anonymous function as an argument, if it is the last parameter, you can compress the closing braces and parenthesis without a space:\n```\narray_map( $list, function ( $item ) {\n    return $item->title;\n}); // Space not required between brace and parenthesis.\n```\nHowever, you cannot do this if it is not the last parameter.\n```\nadd_action( 'init', function () {\n    call_func();\n}, 10 ); // Space required after 10\n```\n(Note that this rule applies also to standard function calls; you can have `));` for nested function calls or `]);` for short arrays in a function call.)\nGenerally speaking, you should avoid using anonymous functions for actions and filters. These aren't possible to unhook neatly, and with namespaces you don't need to worry about the global namespace pollution of one-function-per-hook."
+  },
+  {
+    "question": "What is the preferred syntax for creating a new array in JavaScript?",
+    "target_chunk_id": "how-we-work_style_php_chunk_11",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "## Array Creation\nWhen creating a new array, prefer the `[]` short-array syntax over the `array()` old-style syntax. This is more compact, and fits better with how JavaScript works. In addition, it can make it a little easier to read nested options arrays.\n```\n// No:\nget_posts( array(\n    'author_in' => array( 1, 2, 3 ),\n    'meta_query' => array(\n        'relation' => 'AND',\n        array(\n            'key' => '_my_meta',\n            'value' => '1'\n        ),\n    ),\n) );\n\n// Yes:\nget_posts( [\n    'author_in' => [ 1, 2, 3 ],\n    'meta_query' => [\n        'relation' => 'AND',\n        [\n            'key' => '_my_meta',\n            'value' => '1'\n        ],\n    ],\n] );\n```"
+  },
+  {
+    "question": "How does the new syntax make it easier to read nested options arrays?",
+    "target_chunk_id": "how-we-work_style_php_chunk_11",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "## Array Creation\nWhen creating a new array, prefer the `[]` short-array syntax over the `array()` old-style syntax. This is more compact, and fits better with how JavaScript works. In addition, it can make it a little easier to read nested options arrays.\n```\n// No:\nget_posts( array(\n    'author_in' => array( 1, 2, 3 ),\n    'meta_query' => array(\n        'relation' => 'AND',\n        array(\n            'key' => '_my_meta',\n            'value' => '1'\n        ),\n    ),\n) );\n\n// Yes:\nget_posts( [\n    'author_in' => [ 1, 2, 3 ],\n    'meta_query' => [\n        'relation' => 'AND',\n        [\n            'key' => '_my_meta',\n            'value' => '1'\n        ],\n    ],\n] );\n```"
+  },
+  {
+    "question": "What is the recommended visibility keyword when a class method or property should be accessible by subclasses?",
+    "target_chunk_id": "how-we-work_style_php_chunk_12",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "## Visibility (Public/Protected/Private)\nClass methods and properties should always be marked with a visibility keyword, one of `public`, `protected` or `private`. Generally speaking, `private` should be avoided in favour of `protected`, as it doesn't allow subclasses to access the method. In most cases, this is an unnecessary hindrance, and leads to subclasses simply copy-and-pasting the code when they need to override it.\n```\n// No:\nclass MyClass {\n    var $foo = 1;\n    function __construct() {}\n}\n\n// Yes:\nclass MyClass {\n    protected $foo = 1;\n    public function __construct() {}\n}\n```"
+  },
+  {
+    "question": "Why is 'private' visibility generally considered less desirable than 'protected' in class design?",
+    "target_chunk_id": "how-we-work_style_php_chunk_12",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "## Visibility (Public/Protected/Private)\nClass methods and properties should always be marked with a visibility keyword, one of `public`, `protected` or `private`. Generally speaking, `private` should be avoided in favour of `protected`, as it doesn't allow subclasses to access the method. In most cases, this is an unnecessary hindrance, and leads to subclasses simply copy-and-pasting the code when they need to override it.\n```\n// No:\nclass MyClass {\n    var $foo = 1;\n    function __construct() {}\n}\n\n// Yes:\nclass MyClass {\n    protected $foo = 1;\n    public function __construct() {}\n}\n```"
+  },
+  {
+    "question": "What is the purpose of following WordPress rules on inline documentation?",
+    "target_chunk_id": "how-we-work_style_php_chunk_13",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "## Inline Documentation\nGenerally, follow [the WordPress rules on inline documentation](https://href.li/?https://make.wordpress.org/core/handbook/best-practices/inline-documentation-standards/php/).\nAn exception is made for the description. Descriptions should be written in the imperative (as a command) rather than third-person indicative. This is the **opposite** of what WordPress coding standards recommend.\nWhen conjugating, pretend you're commanding someone to do something. (The imperative generally follows the same rules as second-person indicative.)\n* No: \"Displays the date.\"\n* Yes: \"Display the date.\"\nThis is an intentional stylistic choice and deviation from the WordPress coding standards. The WordPress standards produce an incomplete sentence, missing a subject, which can be confusing.\nThe short description should be able to replace the function name. Doing this for all your functions should produce a sentence that describes what you're doing.\n* No: \"Queries the database. Formats the data for output.\"\n* Yes: \"Query the database. Format the data.\""
+  },
+  {
+    "question": "How should descriptions be written in the imperative form?",
+    "target_chunk_id": "how-we-work_style_php_chunk_13",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "## Inline Documentation\nGenerally, follow [the WordPress rules on inline documentation](https://href.li/?https://make.wordpress.org/core/handbook/best-practices/inline-documentation-standards/php/).\nAn exception is made for the description. Descriptions should be written in the imperative (as a command) rather than third-person indicative. This is the **opposite** of what WordPress coding standards recommend.\nWhen conjugating, pretend you're commanding someone to do something. (The imperative generally follows the same rules as second-person indicative.)\n* No: \"Displays the date.\"\n* Yes: \"Display the date.\"\nThis is an intentional stylistic choice and deviation from the WordPress coding standards. The WordPress standards produce an incomplete sentence, missing a subject, which can be confusing.\nThe short description should be able to replace the function name. Doing this for all your functions should produce a sentence that describes what you're doing.\n* No: \"Queries the database. Formats the data for output.\"\n* Yes: \"Query the database. Format the data.\""
+  },
+  {
+    "question": "What is the purpose of adding type declarations in PHP?",
+    "target_chunk_id": "how-we-work_style_php_chunk_14",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "## PHP Type Declarations\nAdding type declarations where possible is a good way to catch bugs early, and have less manual type checking code. Both internally hosted and VIP projects have at least PHP 7.0, so type declarations for arguments and return types (including scalar values) are supported. Always use the short name for scalar types such as `bool` and `int`."
+  },
+  {
+    "question": "What PHP version is required for type declarations to be supported?",
+    "target_chunk_id": "how-we-work_style_php_chunk_14",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "## PHP Type Declarations\nAdding type declarations where possible is a good way to catch bugs early, and have less manual type checking code. Both internally hosted and VIP projects have at least PHP 7.0, so type declarations for arguments and return types (including scalar values) are supported. Always use the short name for scalar types such as `bool` and `int`."
+  },
+  {
+    "question": "When should you use type declarations for functions called by WordPress internals?",
+    "target_chunk_id": "how-we-work_style_php_chunk_15",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "### Argument Type Declarations\nFor functions that are called by WordPress internals, only use type declarations when you are absolutely sure an argument is of that type (or can safely be cast to that type) in all expected executions. If your function is not being called by internal WordPress functionality, it's recommended to use type declarations wherever possible."
+  },
+  {
+    "question": "When should you use type declarations for functions not called by WordPress internals?",
+    "target_chunk_id": "how-we-work_style_php_chunk_15",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "### Argument Type Declarations\nFor functions that are called by WordPress internals, only use type declarations when you are absolutely sure an argument is of that type (or can safely be cast to that type) in all expected executions. If your function is not being called by internal WordPress functionality, it's recommended to use type declarations wherever possible."
+  },
+  {
+    "question": "What is the purpose of using return type declarations in functions?",
+    "target_chunk_id": "how-we-work_style_php_chunk_16",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "### Return Type Declarations\nUse return type declarations when your function *can only return one type*. This excludes any functions that can return an instance of `WP_Error` or multiple scalar and/or compound types. You may use nullable return types when returning `null` along with one other type.\n```\n// Yes:\nadd_filter( 'excerpt_length', 'modify_excerpt_length' );\nfunction modify_excerpt_length( int $length ) : int {\n    return $length \n\n// Yes:\n\n\n// No:\n\n\n// Yes:\n\n```\nThis only applies to single statements. For multiple statements, these should be expanded into a full multiline statement with semicolons.\n```\n// No:\n\n\n// Yes:\n\n\n// No:\ndisplay_name\n)) ?>\n\n// Yes:\ndisplay_name\n));\n?>\n```"
+  },
+  {
+    "question": "When should return type declarations be used in functions?",
+    "target_chunk_id": "how-we-work_style_php_chunk_16",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "### Return Type Declarations\nUse return type declarations when your function *can only return one type*. This excludes any functions that can return an instance of `WP_Error` or multiple scalar and/or compound types. You may use nullable return types when returning `null` along with one other type.\n```\n// Yes:\nadd_filter( 'excerpt_length', 'modify_excerpt_length' );\nfunction modify_excerpt_length( int $length ) : int {\n    return $length \n\n// Yes:\n\n\n// No:\n\n\n// Yes:\n\n```\nThis only applies to single statements. For multiple statements, these should be expanded into a full multiline statement with semicolons.\n```\n// No:\n\n\n// Yes:\n\n\n// No:\ndisplay_name\n)) ?>\n\n// Yes:\ndisplay_name\n));\n?>\n```"
+  },
+  {
+    "question": "What tools are required for engineers at Human Made?",
+    "target_chunk_id": "development-tools_chunk_1",
+    "target_document_id": "development-tools",
+    "expected_output": "# Tools we use\nThis page aims to document some of the tools you need to do your job as an engineer at Human Made.\nSome things are required, but generally we try to be flexible about what you use. If you're already happy with your development setup, you probably won't need to change much. That said, documenting some commonly used tools and configurations is still important."
+  },
+  {
+    "question": "What flexibility is there in choosing tools for engineers at Human Made?",
+    "target_chunk_id": "development-tools_chunk_1",
+    "target_document_id": "development-tools",
+    "expected_output": "# Tools we use\nThis page aims to document some of the tools you need to do your job as an engineer at Human Made.\nSome things are required, but generally we try to be flexible about what you use. If you're already happy with your development setup, you probably won't need to change much. That said, documenting some commonly used tools and configurations is still important."
+  },
+  {
+    "question": "What tools are essential for day-to-day development?",
+    "target_chunk_id": "development-tools_chunk_2",
+    "target_document_id": "development-tools",
+    "expected_output": "## Essential Tools\nThese are the key tools you'll *need* for day-to-day development, so make sure you have access to these. You should be given access to these as part of your induction, but if not, ask your Engineering Manager! Make sure to enable two-factor authentication where possible.\n* *Laptop*. Most people use Apple laptops, and much of the guidance here reflects this. You are free to choose an alternative, and we have some engineers who use Windows or Linux, but there may not be so much support available from the rest of the team. Join the slack channels [#interests-linux](https://href.li/?https://slack.com/app_redirect?channel=C8347R134) or [#interests-windows-os](https://href.li/?https://slack.com/app_redirect?channel=CHBG43ML4) if you decide to use one of these platforms.\n* *Git & [GitHub](https://href.li/?https://github.com/humanmade)* We use Github extensively, so you will need a github account. You'll also need git installed on your computer."
+  },
+  {
+    "question": "What is the recommended laptop operating system for most engineers?",
+    "target_chunk_id": "development-tools_chunk_2",
+    "target_document_id": "development-tools",
+    "expected_output": "## Essential Tools\nThese are the key tools you'll *need* for day-to-day development, so make sure you have access to these. You should be given access to these as part of your induction, but if not, ask your Engineering Manager! Make sure to enable two-factor authentication where possible.\n* *Laptop*. Most people use Apple laptops, and much of the guidance here reflects this. You are free to choose an alternative, and we have some engineers who use Windows or Linux, but there may not be so much support available from the rest of the team. Join the slack channels [#interests-linux](https://href.li/?https://slack.com/app_redirect?channel=C8347R134) or [#interests-windows-os](https://href.li/?https://slack.com/app_redirect?channel=CHBG43ML4) if you decide to use one of these platforms.\n* *Git & [GitHub](https://href.li/?https://github.com/humanmade)* We use Github extensively, so you will need a github account. You'll also need git installed on your computer."
+  },
+  {
+    "question": "What is the primary way we communicate?",
+    "target_chunk_id": "development-tools_chunk_3",
+    "target_document_id": "development-tools",
+    "expected_output": "* *[Slack](https://href.li/?https://hmn.slack.com/)*. Probably the main way we communicate. Download the app on your laptop. Make sure to join [#dev](https://href.li/?https://hmn.slack.com/messages/C03K3J34A/)! Installing the app on your phone can be useful too, but be careful that you're able to switch off at the end of the day!\n* [1Password](https://href.li/?https://1password.com/) Password managers are good for security to ensure we use strong and unique passwords. We also use 1Password to share access to sensitive information across the company. You will need to be added to the ‘engineer' group. Projects will often have their own group or vault that you will be given access to when you join.\n* [Zoom](https://href.li/?https://zoom.us). Most of our meetings are on zoom.\n* Running sites locally.\n+ *[Docker](https://href.li/?https://www.docker.com)* You will need this to run [Altis local server](https://href.li/?https://docs.altis-dxp.com/local-server/) and other modern WordPress local environments."
+  },
+  {
+    "question": "What is the recommended way to run modern WordPress local sites?",
+    "target_chunk_id": "development-tools_chunk_3",
+    "target_document_id": "development-tools",
+    "expected_output": "* *[Slack](https://href.li/?https://hmn.slack.com/)*. Probably the main way we communicate. Download the app on your laptop. Make sure to join [#dev](https://href.li/?https://hmn.slack.com/messages/C03K3J34A/)! Installing the app on your phone can be useful too, but be careful that you're able to switch off at the end of the day!\n* [1Password](https://href.li/?https://1password.com/) Password managers are good for security to ensure we use strong and unique passwords. We also use 1Password to share access to sensitive information across the company. You will need to be added to the ‘engineer' group. Projects will often have their own group or vault that you will be given access to when you join.\n* [Zoom](https://href.li/?https://zoom.us). Most of our meetings are on zoom.\n* Running sites locally.\n+ *[Docker](https://href.li/?https://www.docker.com)* You will need this to run [Altis local server](https://href.li/?https://docs.altis-dxp.com/local-server/) and other modern WordPress local environments."
+  },
+  {
+    "question": "What software is needed for a Vagrant based local development environment?",
+    "target_chunk_id": "development-tools_chunk_4",
+    "target_document_id": "development-tools",
+    "expected_output": "+ *Vagrant & Virtualbox*. Some projects may recommend or require using a Vagrant based local development environment (e.g. those using [Altis Local Chassis](https://href.li/?https://docs.altis-dxp.com/local-chassis/)), for which you will need to use both [Vagrant](https://href.li/?https://www.vagrantup.com/) and [Virtualbox](https://href.li/?https://www.virtualbox.org/).\n* *[Node.js](https://href.li/?https://nodejs.org/en/).* You will need this to run most local build processes. We recommend installing Node using [nvm](https://href.li/?https://github.com/nvm-sh/nvm) so that it is easier to switch between different versions depending on your project.\n* *Code Editor.* You're free to use whatever you want to write code, but you'll need something. Here are the most commonly used code editors at Human Made. See below for some tips.\n+ [VS Code](https://href.li/?https://code.visualstudio.com/)\n+ [PHP Storm](https://href.li/?https://www.jetbrains.com/phpstorm/)\n* Terminal app.\n+ MacOS\n- Terminal.app\n- Other app e.g. [iTerm](https://href.li/?https://iterm2.com/) or [Hyper](https://href.li/?https://hyper.is/).\n- One built into your code editor.\n* Web browser!"
+  },
+  {
+    "question": "What is recommended for installing Node.js?",
+    "target_chunk_id": "development-tools_chunk_4",
+    "target_document_id": "development-tools",
+    "expected_output": "+ *Vagrant & Virtualbox*. Some projects may recommend or require using a Vagrant based local development environment (e.g. those using [Altis Local Chassis](https://href.li/?https://docs.altis-dxp.com/local-chassis/)), for which you will need to use both [Vagrant](https://href.li/?https://www.vagrantup.com/) and [Virtualbox](https://href.li/?https://www.virtualbox.org/).\n* *[Node.js](https://href.li/?https://nodejs.org/en/).* You will need this to run most local build processes. We recommend installing Node using [nvm](https://href.li/?https://github.com/nvm-sh/nvm) so that it is easier to switch between different versions depending on your project.\n* *Code Editor.* You're free to use whatever you want to write code, but you'll need something. Here are the most commonly used code editors at Human Made. See below for some tips.\n+ [VS Code](https://href.li/?https://code.visualstudio.com/)\n+ [PHP Storm](https://href.li/?https://www.jetbrains.com/phpstorm/)\n* Terminal app.\n+ MacOS\n- Terminal.app\n- Other app e.g. [iTerm](https://href.li/?https://iterm2.com/) or [Hyper](https://href.li/?https://hyper.is/).\n- One built into your code editor.\n* Web browser!"
+  },
+  {
+    "question": "What tools are built into your code editor?",
+    "target_chunk_id": "development-tools_chunk_5",
+    "target_document_id": "development-tools",
+    "expected_output": "- One built into your code editor.\n* Web browser!\nAlso refer to the [company handbook tools page for a reference on other tools used across the company](https://handbook.hmn.md/working-here/tools/).\nThere are other tools that may be essential for the project you're working on (e.g. project management tools such as Jira), but you probably don't need access to it until you actually need it. Individual projects will have their own onboarding process to ensure you have access to everything required when you join. However if you feel that you don't have access to something that you should, don't be afraid to ask."
+  },
+  {
+    "question": "Where can you find a reference to other tools used across the company?",
+    "target_chunk_id": "development-tools_chunk_5",
+    "target_document_id": "development-tools",
+    "expected_output": "- One built into your code editor.\n* Web browser!\nAlso refer to the [company handbook tools page for a reference on other tools used across the company](https://handbook.hmn.md/working-here/tools/).\nThere are other tools that may be essential for the project you're working on (e.g. project management tools such as Jira), but you probably don't need access to it until you actually need it. Individual projects will have their own onboarding process to ensure you have access to everything required when you join. However if you feel that you don't have access to something that you should, don't be afraid to ask."
+  },
+  {
+    "question": "What database management applications are available for MacOS?",
+    "target_chunk_id": "development-tools_chunk_6",
+    "target_document_id": "development-tools",
+    "expected_output": "## Optional tools\nNone of these tools are essential, but are things that engineers at Human Made use as part of their setup. You won't need to install all of them right away, but take a look and you can install things as and when you need them.\n* Database management application.\n+ MacOS\n- [SequelPro](https://href.li/?https://www.sequelpro.com/)\n- [SequelAce](https://href.li/?https://github.com/Sequel-Ace/Sequel-Ace)\n+ Linux or Cross-Platform\n- [TablePlus](https://href.li/?https://tableplus.com/)\n- [DBeaver](https://href.li/?https://dbeaver.io/)\n* Git GUI. Whilst we encourage you to become comfortable using git on the command line, sometimes having a nice interface is a huge help.\n+ MacOS\n- [Sourcetree](https://href.li/?https://www.sourcetreeapp.com/).\n* Git merge tool\n+ MacOS\n- [Araxis merge](https://href.li/?https://www.araxis.com/merge/index.en)\n* API tool. Not essential, but can be really useful if you're doing a lot of work with APIs.\n+ MacOS\n- [Postman](https://href.li/?https://www.postman.com/)\n- [Paw](https://href.li/?https://paw.cloud/)"
+  },
+  {
+    "question": "What Git GUI tools are available for MacOS?",
+    "target_chunk_id": "development-tools_chunk_6",
+    "target_document_id": "development-tools",
+    "expected_output": "## Optional tools\nNone of these tools are essential, but are things that engineers at Human Made use as part of their setup. You won't need to install all of them right away, but take a look and you can install things as and when you need them.\n* Database management application.\n+ MacOS\n- [SequelPro](https://href.li/?https://www.sequelpro.com/)\n- [SequelAce](https://href.li/?https://github.com/Sequel-Ace/Sequel-Ace)\n+ Linux or Cross-Platform\n- [TablePlus](https://href.li/?https://tableplus.com/)\n- [DBeaver](https://href.li/?https://dbeaver.io/)\n* Git GUI. Whilst we encourage you to become comfortable using git on the command line, sometimes having a nice interface is a huge help.\n+ MacOS\n- [Sourcetree](https://href.li/?https://www.sourcetreeapp.com/).\n* Git merge tool\n+ MacOS\n- [Araxis merge](https://href.li/?https://www.araxis.com/merge/index.en)\n* API tool. Not essential, but can be really useful if you're doing a lot of work with APIs.\n+ MacOS\n- [Postman](https://href.li/?https://www.postman.com/)\n- [Paw](https://href.li/?https://paw.cloud/)"
+  },
+  {
+    "question": "What is the purpose of setting up a code editor?",
+    "target_chunk_id": "development-tools_chunk_7",
+    "target_document_id": "development-tools",
+    "expected_output": "## Setting up your code editor"
+  },
+  {
+    "question": "What are the key steps involved in setting up a code editor?",
+    "target_chunk_id": "development-tools_chunk_7",
+    "target_document_id": "development-tools",
+    "expected_output": "## Setting up your code editor"
+  },
+  {
+    "question": "What are some useful settings in VS Code?",
+    "target_chunk_id": "development-tools_chunk_8",
+    "target_document_id": "development-tools",
+    "expected_output": "### VS Code\nSome useful settings and extensions.\n* [PHP Intelephense.](https://href.li/?https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client)\n* [PHP Debug](https://href.li/?https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug)\n* [PHP Sniffer & Beautifier](https://href.li/?https://marketplace.visualstudio.com/items?itemName=ValeryanM.vscode-phpsab). Also add `\"phpcs.showSources\": true` to your settings.json so that you can see the specific PHPCS rule that's failing in the `Problems` tab message.\n* [PHP Docblocker](https://href.li/?https://marketplace.visualstudio.com/items?itemName=neilbrayfield.php-docblocker) and [Document This](https://href.li/?https://marketplace.visualstudio.com/items?itemName=oouo-diogo-perdigao.docthis)\n* [ESLint](https://href.li/?https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)\n* [Stylelint](https://href.li/?https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)\n* [WordPress snippets](https://href.li/?https://marketplace.visualstudio.com/items?itemName=wordpresstoolbox.wordpress-toolbox)"
+  },
+  {
+    "question": "How do you configure the PHPCS rule in VS Code?",
+    "target_chunk_id": "development-tools_chunk_8",
+    "target_document_id": "development-tools",
+    "expected_output": "### VS Code\nSome useful settings and extensions.\n* [PHP Intelephense.](https://href.li/?https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client)\n* [PHP Debug](https://href.li/?https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug)\n* [PHP Sniffer & Beautifier](https://href.li/?https://marketplace.visualstudio.com/items?itemName=ValeryanM.vscode-phpsab). Also add `\"phpcs.showSources\": true` to your settings.json so that you can see the specific PHPCS rule that's failing in the `Problems` tab message.\n* [PHP Docblocker](https://href.li/?https://marketplace.visualstudio.com/items?itemName=neilbrayfield.php-docblocker) and [Document This](https://href.li/?https://marketplace.visualstudio.com/items?itemName=oouo-diogo-perdigao.docthis)\n* [ESLint](https://href.li/?https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)\n* [Stylelint](https://href.li/?https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)\n* [WordPress snippets](https://href.li/?https://marketplace.visualstudio.com/items?itemName=wordpresstoolbox.wordpress-toolbox)"
+  },
+  {
+    "question": "How do you enable bracket pair colorization in VSCode?",
+    "target_chunk_id": "development-tools_chunk_9",
+    "target_document_id": "development-tools",
+    "expected_output": "* [WordPress snippets](https://href.li/?https://marketplace.visualstudio.com/items?itemName=wordpresstoolbox.wordpress-toolbox)\n* [WordPress Gutenberg Snippets](https://href.li/?https://marketplace.visualstudio.com/items?itemName=BenjaminZekavica.wordpress-gutenberg-snippets)\n* [Gitlens](https://href.li/?https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)\n* Colorize bracket pairs for easier identification by adding `\"editor.bracketPairColorization.enabled\": true` to your settings.json.\n* [Import cost](https://href.li/?https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost) or you can use [Bundlephobia](https://href.li/?https://bundlephobia.com/)"
+  },
+  {
+    "question": "What tools can you use to estimate the cost of importing packages in your project?",
+    "target_chunk_id": "development-tools_chunk_9",
+    "target_document_id": "development-tools",
+    "expected_output": "* [WordPress snippets](https://href.li/?https://marketplace.visualstudio.com/items?itemName=wordpresstoolbox.wordpress-toolbox)\n* [WordPress Gutenberg Snippets](https://href.li/?https://marketplace.visualstudio.com/items?itemName=BenjaminZekavica.wordpress-gutenberg-snippets)\n* [Gitlens](https://href.li/?https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)\n* Colorize bracket pairs for easier identification by adding `\"editor.bracketPairColorization.enabled\": true` to your settings.json.\n* [Import cost](https://href.li/?https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost) or you can use [Bundlephobia](https://href.li/?https://bundlephobia.com/)"
+  },
+  {
+    "question": "What is PHP Storm?",
+    "target_chunk_id": "development-tools_chunk_10",
+    "target_document_id": "development-tools",
+    "expected_output": "### PHP Storm\nTo do."
+  },
+  {
+    "question": "What are the primary tasks to be done in PHP Storm?",
+    "target_chunk_id": "development-tools_chunk_10",
+    "target_document_id": "development-tools",
+    "expected_output": "### PHP Storm\nTo do."
+  },
+  {
+    "question": "What is the main purpose of this section of the handbook?",
+    "target_chunk_id": "development-tools_chunk_11",
+    "target_document_id": "development-tools",
+    "expected_output": "## How We Work\nThis whole section of the handbook is about how Human Made works, and you should probably read all of it for a good overview. If you're short of time, the key documents to read are the [development process](/how-we-work/process/development/) and [review process](/how-we-work/process/reviews/) pages."
+  },
+  {
+    "question": "What are the key documents to read if you're short on time?",
+    "target_chunk_id": "development-tools_chunk_11",
+    "target_document_id": "development-tools",
+    "expected_output": "## How We Work\nThis whole section of the handbook is about how Human Made works, and you should probably read all of it for a good overview. If you're short of time, the key documents to read are the [development process](/how-we-work/process/development/) and [review process](/how-we-work/process/reviews/) pages."
+  },
+  {
+    "question": "What can you do if you see something in the onboarding documents that doesn't make sense?",
+    "target_chunk_id": "development-tools_chunk_12",
+    "target_document_id": "development-tools",
+    "expected_output": "## We're Here to Help\nYour manager and project team will help you get up to speed quickly, but everybody at Human Made is here to support you as well. If you see anything in these onboarding documents that doesn't make sense or does not work for you — a broken link, an unfamiliar concept, something that looks outdated — don't be afraid to ask questions!\nYou can ask questions in `#general` or `#dev` in Slack, message anybody directly, or join somebody's office hours zoom. Please do not hesitate if you need assistance in any way.\nWe're glad to have you on the team — welcome to Human Made!"
+  },
+  {
+    "question": "How can you ask for assistance if you need it?",
+    "target_chunk_id": "development-tools_chunk_12",
+    "target_document_id": "development-tools",
+    "expected_output": "## We're Here to Help\nYour manager and project team will help you get up to speed quickly, but everybody at Human Made is here to support you as well. If you see anything in these onboarding documents that doesn't make sense or does not work for you — a broken link, an unfamiliar concept, something that looks outdated — don't be afraid to ask questions!\nYou can ask questions in `#general` or `#dev` in Slack, message anybody directly, or join somebody's office hours zoom. Please do not hesitate if you need assistance in any way.\nWe're glad to have you on the team — welcome to Human Made!"
   }
 ]

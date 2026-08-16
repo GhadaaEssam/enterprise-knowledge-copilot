@@ -1,0 +1,4 @@
+Engine,Queries,Hit Rate@5,MRR@5
+KeywordSearchEngine,1231,0.9188,0.7452
+SqliteVectorSearchEngine,1231,0.7799,0.6138
+HybridSearchEngine,1231,0.8757,0.6381
