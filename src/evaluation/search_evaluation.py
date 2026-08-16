@@ -4,6 +4,7 @@ from typing import Dict, List, Any
 from tqdm import tqdm
 
 
+
 def evaluate_engine(
     engine, ground_truth: List[Dict[str, Any]], num_results: int = 5
 ) -> Dict[str, float]:

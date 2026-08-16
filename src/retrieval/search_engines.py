@@ -59,35 +59,6 @@ class KeywordSearchEngine(BaseSearchEngine):
         )
         return results
 
-class VectorSearchEngine(BaseSearchEngine):
-
-    def __init__(
-        self,
-        embedder,
-        embeddings_matrix: np.ndarray,
-        metadata: List[Dict[str, Any]],
-    ):
-        self.embedder = embedder
-        self.embeddings_matrix = embeddings_matrix  # Shape: (N, D)
-        self.metadata = metadata  # Length: N
-
-    def search(
-        self, query: str, num_results: int = 5, **kwargs
-    ) -> List[Dict[str, Any]]:
-        query_vector = self.embedder.encode(query)
-
-        # Cosine similarity via matrix dot product (assuming normalized vectors)
-        scores = self.embeddings_matrix.dot(query_vector)
-        top_indices = np.argsort(scores)[::-1][:num_results]
-
-        results = []
-        for idx in top_indices:
-            doc = dict(self.metadata[idx])
-            doc["_score"] = float(scores[idx])
-            results.append(doc)
-
-        return results
-
 
 class SqliteVectorSearchEngine(BaseSearchEngine):
 

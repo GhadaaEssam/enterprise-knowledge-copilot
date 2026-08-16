@@ -136,6 +136,28 @@ The knowledge base is built from the HMN engineering documentation:
 
 The ingestion pipeline transforms the website documentation into searchable knowledge.
 
+### Run the complete ingestion pipeline
+
+Run every ingestion stage with one command:
+
+```bash
+uv run python -m src.ingestion.pipeline
+```
+
+`IngestionPipeline` scrapes the source, cleans and chunks its Markdown, and creates
+ONNX embeddings. Final artifacts are saved per collection under:
+
+```text
+data/processed/hmn_engineering_docs/cleaned_documents.json
+data/processed/hmn_engineering_docs/chunked_documents.json
+data/embeddings/hmn_engineering_docs/embeddings.npy
+data/embeddings/hmn_engineering_docs/embedding_metadata.pkl
+```
+
+Raw scraped files and individual cleaned Markdown files are temporary and are removed
+after a successful run. To retain them for debugging, call
+`IngestionPipeline().run(cleanup=False)`.
+
 ## 1. Scrape Documentation
 
 The engineering documentation is scraped from:
@@ -203,6 +225,16 @@ These embeddings are used by the vector retrieval implementation.
 
 The processed documents and embeddings are stored in the searchable knowledge base.
 
+Build both retrieval indexes after ingestion with:
+
+```bash
+uv run python -m src.retrieval.index_builder
+```
+
+This creates `data/db/hmn_engineering_docs_keyword.db` and
+`data/db/hmn_engineering_docs_vector.db`. The `IndexBuilder` validates that the
+number of chunks equals the number of embedding vectors before writing either index.
+
 Three retrieval approaches were then implemented:
 
 ```text
@@ -232,6 +264,15 @@ Rather than assuming that vector or hybrid search would perform best, three retr
 1. `KeywordSearchEngine`
 2. `SqliteVectorSearchEngine`
 3. `HybridSearchEngine`
+
+Generate the ground-truth questions used for retrieval evaluation with:
+
+```bash
+uv run python -m src.evaluation.ground_truth_generation
+```
+
+It reads the chunked documents and creates/resumes `data/ground_truth.json`.
+Set `GROQ_API_KEY` in `.env` before running it.
 
 The evaluation is available in:
 
