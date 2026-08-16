@@ -1,86 +1,94 @@
-import os
+"""Small, dependency-free-to-call web scraper used by the ingestion pipeline."""
+
+from __future__ import annotations
+
 import re
-from urllib.parse import urljoin, urlparse
+from collections import deque
+from pathlib import Path
+from urllib.parse import urljoin, urlparse, urlunparse
+
 import requests
 from bs4 import BeautifulSoup
-from markdownify import markdownify as md
+from markdownify import markdownify as markdownify
 
-# Configuration
-START_URL = "https://engineering.hmn.md/"
-BASE_DOMAIN = urlparse(START_URL).netloc
-OUTPUT_DIR = "./hmn_engineering_docs"
 
-# Track visited URLs
-visited_urls = set()
-urls_to_visit = [START_URL]
+DEFAULT_START_URL = "https://engineering.hmn.md/"
+DEFAULT_HEADERS = {"User-Agent": "Enterprise Knowledge Copilot ingestion bot"}
 
-os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-def sanitize_filename(url_path):
-    """Generate a clean file name based on the URL path."""
+def sanitize_filename(url_path: str) -> str:
+    """Return a stable, filesystem-safe Markdown filename for a URL path."""
     path = url_path.strip("/")
     if not path:
         return "index.md"
-    # Replace slashes and invalid filename characters with underscores
-    filename = re.sub(r'[\/\\:\*\?"<>\|]', '_', path)
-    return f"{filename}.md"
+    return f"{re.sub(r'[\\/\\\\:\\*\\?\"<>\\|]', '_', path)}.md"
 
-headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Author/Researcher"
-}
 
-print(f"Starting crawl of {START_URL}...")
+def scrape_site(
+    start_url: str,
+    output_dir: str | Path,
+    *,
+    timeout: int = 10,
+    session: requests.Session | None = None,
+) -> list[Path]:
+    """Crawl same-domain HTML pages and write their main content as Markdown.
 
-while urls_to_visit:
-    current_url = urls_to_visit.pop(0)
-    
-    # Normalize URL (strip fragments/anchors)
-    current_url = current_url.split('#')[0]
-    
-    if current_url in visited_urls:
-        continue
-    
-    visited_urls.add(current_url)
-    print(f"Scraping: {current_url}")
-    
-    try:
-        response = requests.get(current_url, headers=headers, timeout=10)
-        if response.status_code != 200 or 'text/html' not in response.headers.get('Content-Type', ''):
+    Returns the files written.  Network failures on individual pages are skipped so
+    one unavailable page does not discard the rest of an ingestion run.
+    """
+    parsed_start = urlparse(start_url)
+    if parsed_start.scheme not in {"http", "https"} or not parsed_start.netloc:
+        raise ValueError("start_url must be an absolute HTTP(S) URL")
+
+    destination = Path(output_dir)
+    destination.mkdir(parents=True, exist_ok=True)
+    client = session or requests.Session()
+    base_domain = parsed_start.netloc
+    visited: set[str] = set()
+    pending = deque([start_url])
+    written: list[Path] = []
+
+    while pending:
+        current_url = pending.popleft().split("#", 1)[0]
+        if current_url in visited:
             continue
-        
-        soup = BeautifulSoup(response.text, 'html.parser')
-        
-        # Discover internal links to crawl further
-        for link in soup.find_all('a', href=True):
-            full_url = urljoin(current_url, link['href']).split('#')[0]
-            parsed_full = urlparse(full_url)
-            
-            # Stay within the target domain
-            if parsed_full.netloc == BASE_DOMAIN and full_url not in visited_urls:
-                urls_to_visit.append(full_url)
-        
-        # Target the primary content container (fallback to <body> if specific tag not found)
+        visited.add(current_url)
+
+        try:
+            response = client.get(current_url, headers=DEFAULT_HEADERS, timeout=timeout)
+            if response.status_code != 200 or "text/html" not in response.headers.get("Content-Type", ""):
+                continue
+        except requests.RequestException:
+            continue
+
+        soup = BeautifulSoup(response.text, "html.parser")
+        for link in soup.find_all("a", href=True):
+            candidate = urljoin(current_url, link["href"])
+            parsed = urlparse(candidate)
+            if parsed.netloc == base_domain and parsed.scheme in {"http", "https"}:
+                normalized = urlunparse(parsed._replace(fragment=""))
+                if normalized not in visited:
+                    pending.append(normalized)
+
         main_content = (
-            soup.find('main') 
-            or soup.find('article') 
-            or soup.find('div', class_=re.compile(r'content|main|article', re.I))
+            soup.find("main")
+            or soup.find("article")
+            or soup.find("div", class_=re.compile(r"content|main|article", re.I))
             or soup.body
         )
-        
-        if main_content:
-            # Convert HTML to Markdown
-            markdown_text = md(str(main_content), heading_style="ATX")
-            
-            # Save file
-            parsed_url = urlparse(current_url)
-            filename = sanitize_filename(parsed_url.path)
-            filepath = os.path.join(OUTPUT_DIR, filename)
-            
-            with open(filepath, "w", encoding="utf-8") as f:
-                f.write(f"# Source: {current_url}\n\n")
-                f.write(markdown_text)
-                
-    except Exception as e:
-        print(f"Failed to process {current_url}: {e}")
+        if not main_content:
+            continue
 
-print(f"\nDone! Scraped {len(visited_urls)} pages to `{OUTPUT_DIR}`.")
+        output_file = destination / sanitize_filename(urlparse(current_url).path)
+        output_file.write_text(
+            f"# Source: {current_url}\n\n{markdownify(str(main_content), heading_style='ATX')}",
+            encoding="utf-8",
+        )
+        written.append(output_file)
+
+    return written
+
+
+if __name__ == "__main__":
+    files = scrape_site(DEFAULT_START_URL, "data/raw/hmn_engineering_docs")
+    print(f"Scraped {len(files)} pages.")

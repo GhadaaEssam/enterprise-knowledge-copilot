@@ -1,23 +1,25 @@
 # src/retrieval/keyword_search.py
-import os
+from pathlib import Path
 from typing import Any, Dict, List
 from sqlitesearch import TextSearchIndex
 
 
 def build_sqlitesearch_index(
     documents: List[Dict[str, Any]],
-    db_path: str = "hnm.db",
+    db_path: str | Path = "hnm.db",
     overwrite: bool = True,
 ) -> TextSearchIndex:
 
-    if overwrite and os.path.exists(db_path):
-        os.remove(db_path)
+    output_path = Path(db_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    if overwrite and output_path.exists():
+        output_path.unlink()
 
     # Register actual text columns into FTS
     index = TextSearchIndex(
         text_fields=["title", "text", "category", "subcategory"],
         id_field="chunk_id",
-        db_path=db_path,
+        db_path=str(output_path),
     )
 
     index.fit(documents)

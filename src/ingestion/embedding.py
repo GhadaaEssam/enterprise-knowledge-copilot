@@ -1,80 +1,72 @@
-# src/ingestion/embedding.py
+"""Embedding artifact generation for chunked ingestion documents."""
+
+from __future__ import annotations
+
 import json
 import pickle
 from pathlib import Path
+
 import numpy as np
-from tqdm import tqdm
+
 from src.ingestion.embedder import Embedder
 
-# running command: 
-# ➜ /workspaces/enterprise-knowledge-copilot (main) $ /workspaces/enterprise-knowledge-copilot/.venv/bin/python -m src.ingestion.embedding
 
 SRC_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = SRC_DIR.parent.parent
-
-# Resolve absolute paths for input data, model, and output
 INPUT_CHUNKED_JSON = PROJECT_ROOT / "data/processed/chunked_documents.json"
 OUTPUT_EMBEDDINGS_NPY = PROJECT_ROOT / "data/embeddings/embeddings.npy"
 OUTPUT_METADATA_PKL = PROJECT_ROOT / "data/embeddings/embedding_metadata.pkl"
 MODEL_PATH = SRC_DIR / "models" / "Xenova" / "all-MiniLM-L6-v2"
 
-# Instantiate embedder
-embedder = Embedder(path=MODEL_PATH)
 
+def generate_onnx_embeddings(
+    chunks: list[dict],
+    *,
+    embeddings_path: str | Path,
+    metadata_path: str | Path,
+    model_path: str | Path = MODEL_PATH,
+    batch_size: int = 32,
+) -> np.ndarray:
+    """Embed chunks and persist index-aligned vectors and metadata."""
+    if not chunks:
+        raise ValueError("Cannot generate embeddings for an empty chunk list")
+    if batch_size < 1:
+        raise ValueError("batch_size must be greater than zero")
 
-def generate_onnx_embeddings():
-    if not INPUT_CHUNKED_JSON.exists():
-        print(f"Error: {INPUT_CHUNKED_JSON} not found. Run chunker.py first.")
-        return
-
-    with open(INPUT_CHUNKED_JSON, "r", encoding="utf-8") as f:
-        chunks = json.load(f)
-
-    print(f"Loaded {len(chunks)} chunks to embed.")
-
-    # 1. Format text with title metadata for higher RAG context precision
-    texts_to_embed = [
-        f"Title: {c.get('title', '')}\nContent: {c.get('text', '')}"
-        for c in chunks
+    embedder = Embedder(model_path)
+    texts = [f"Title: {chunk.get('title', '')}\nContent: {chunk.get('text', '')}" for chunk in chunks]
+    batches = [
+        embedder.encode_batch(texts[index:index + batch_size])
+        for index in range(0, len(texts), batch_size)
     ]
+    matrix = np.vstack(batches).astype(np.float32)
 
-    # 2. Batch Ingestion
-    batch_size = 32
-    all_vectors = []
+    output_vectors = Path(embeddings_path)
+    output_metadata = Path(metadata_path)
+    output_vectors.parent.mkdir(parents=True, exist_ok=True)
+    output_metadata.parent.mkdir(parents=True, exist_ok=True)
+    np.save(output_vectors, matrix)
+    with output_metadata.open("wb") as file:
+        pickle.dump([{"vector_index": index, **chunk} for index, chunk in enumerate(chunks)], file)
+    return matrix
 
-    print("Generating ONNX embeddings...")
-    for i in tqdm(range(0, len(texts_to_embed), batch_size)):
-        batch_texts = texts_to_embed[i : i + batch_size]
-        batch_vectors = embedder.encode_batch(batch_texts)
-        all_vectors.append(batch_vectors)
 
-    embeddings_matrix = np.vstack(all_vectors).astype(np.float32)
-
-    # 3. Save numpy embeddings array
-    OUTPUT_EMBEDDINGS_NPY.parent.mkdir(parents=True, exist_ok=True)
-    np.save(OUTPUT_EMBEDDINGS_NPY, embeddings_matrix)
-    print(
-        f"Saved matrix: {OUTPUT_EMBEDDINGS_NPY} (Shape: {embeddings_matrix.shape})"
-    )
-
-    # 4. Save index-aligned metadata
-    metadata = []
-    for idx, c in enumerate(chunks):
-        metadata.append({
-            "vector_index": idx,
-            "chunk_id": c.get("chunk_id"),
-            "document_id": c.get("document_id"),
-            "title": c.get("title"),
-            "category": c.get("category"),
-            "source": c.get("source"),
-            "text": c.get("text"),
-        })
-
-    with open(OUTPUT_METADATA_PKL, "wb") as f:
-        pickle.dump(metadata, f)
-
-    print(f"Saved metadata list: {OUTPUT_METADATA_PKL}")
+def generate_embeddings_from_file(
+    input_path: str | Path = INPUT_CHUNKED_JSON,
+    *,
+    embeddings_path: str | Path = OUTPUT_EMBEDDINGS_NPY,
+    metadata_path: str | Path = OUTPUT_METADATA_PKL,
+    model_path: str | Path = MODEL_PATH,
+    batch_size: int = 32,
+) -> np.ndarray:
+    """Backward-compatible file-based entry point for standalone embedding."""
+    with Path(input_path).open(encoding="utf-8") as file:
+        return generate_onnx_embeddings(
+            json.load(file), embeddings_path=embeddings_path, metadata_path=metadata_path,
+            model_path=model_path, batch_size=batch_size,
+        )
 
 
 if __name__ == "__main__":
-    generate_onnx_embeddings()
+    matrix = generate_embeddings_from_file()
+    print(f"Saved {len(matrix)} embeddings to {OUTPUT_EMBEDDINGS_NPY}")
