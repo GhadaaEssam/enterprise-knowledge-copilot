@@ -1,0 +1,702 @@
+[
+  {
+    "question": "What is the purpose of Sprint planning?",
+    "target_chunk_id": "how-we-work_process_agile_chunk_16",
+    "target_document_id": "how-we-work_process_agile",
+    "expected_output": "### Sprint Planning\nWell before a sprint begins, a Sprint Backlog is created. The Sprint Backlog is the smaller list of stories taken from the top of the Product Backlog that has been committed to by the Development Team and designated to be completed in the Sprint.\nSprint planning usually happens at least two sprints ahead of time.\nThis includes:\n* Capacity Update\n* Issue Review\n* Velocity Prediction\n* Team Buy In\n* Team Commitment/Agreement\n*Goal: to plan work for the upcoming sprint/s, outline priorities, account for capacity changes, and commit to deliver*",
+    "_sample_id": 0
+  },
+  {
+    "question": "How can you request more time to contribute to open source projects?",
+    "target_chunk_id": "how-we-work_team_progression_chunk_12",
+    "target_document_id": "how-we-work_team_progression",
+    "expected_output": "**Contributing back to open source projects you're using should be considered part of your regular role.** This includes filing issues, providing patches, and helping out with maintenance where relevant. This benefits us, as we get increased utility from the projects, and also benefits the wider community with better-maintained plugins. You don't need to ask before contributing to open source projects, however keep in mind how much time you're spending, and be sure to discuss with your PM for larger contributions.\nDedicated time for working on open source projects can also be allocated, whether this is part of career progression, or just wider contribution to the community. (If you want to increase how much time you spend contributing, or start contributing to learn, you should contact Tom.) It is important to note that we don't expect you to contribute to open source outside of working hours, and where possible we'll try and fit your contribution time into working hours.",
+    "_sample_id": 1
+  },
+  {
+    "question": "What is the purpose of validation in programming?",
+    "target_chunk_id": "standards_backend_security_chunk_4",
+    "target_document_id": "standards_backend_security",
+    "expected_output": "## Validation\nValidation is a technique to ensure that input is secure before using it in your code.\nWhen validating data, you are verifying that it corresponds to what the program needs. This only works if you have a list of criteria that you can check to determine that the data is valid.",
+    "_sample_id": 2
+  },
+  {
+    "question": "When is the singleton pattern useful?",
+    "target_chunk_id": "standards_backend_best-practices_chunk_6",
+    "target_document_id": "standards_backend_best-practices",
+    "expected_output": "### The Singleton Pattern\nThe singleton pattern is a pattern where you have an object which typically only has a single instance. While the singleton pattern is useful, there can be a tendency to overuse the singleton pattern when working with faux-object-oriented programming. This can come from a desire to have code in classes to meet OOP requirements, while having the ability to get to the instance.\nWhen considering implementing a singleton, consider whether the class is really modelling an object or not. Singletons should be used when modelling an object which just happens to have a single instance; for example, a database connection (like `wpdb`) models an object, but only a single instance is needed. If you are not encapsulating any state, namespaced functions are a better solution.\nIf the solution to your problem is truly to use a singleton, you should typically separate the singleton code from the class. Use a namespaced function which stores the instance in a `static` or `global` variable. This ensures that the object remains reusable, and that the singleton pattern exists purely as a guide instead.",
+    "_sample_id": 3
+  },
+  {
+    "question": "What are some tools used for rendering code in both client and server environments?",
+    "target_chunk_id": "standards_frontend_best-practices_chunk_6",
+    "target_document_id": "standards_frontend_best-practices",
+    "expected_output": "* JavaScript first: basic WordPress PHP templates can be used to render the initial response and be replaced/improved upon with React.\n* JavaScript only: use the same code base to render code in both the client and the server. For internal projects, [humanmade/react-wp-ssr](https://href.li/?https://github.com/humanmade/react-wp-ssr) is included in HM Cloud, for external projects [airbnb/hypernova](https://href.li/?https://github.com/airbnb/hypernova) enables rendering using a node server.",
+    "_sample_id": 4
+  },
+  {
+    "question": "How can style checks be automated in code reviews?",
+    "target_chunk_id": "how-we-work_process_reviews_chunk_9",
+    "target_document_id": "how-we-work_process_reviews",
+    "expected_output": "### Style\nCode reviews should usually check that coding style matches [our coding style guidelines](/style/). If someone is intentionally ignoring a guideline, that's fine too.\nInternal reviews are typically the only ones that need style checking, as we're not responsible for external plugins. The exception to this is if we're specifically asked for it.\nStyle checks should mostly be automated, as it's easy to miss when writing or during a review. This can be performed by the [coding standards checker](https://href.li/?https://github.com/humanmade/coding-standards), and can be enabled on a repo using the [linter bot](https://href.li/?https://github.com/humanmade/linter-bot).",
+    "_sample_id": 5
+  },
+  {
+    "question": "What disciplines do the members of the Development Team typically work across?",
+    "target_chunk_id": "how-we-work_process_agile_chunk_6",
+    "target_document_id": "how-we-work_process_agile",
+    "expected_output": "### Development Team\nThe Development Team is the team responsible for building the product. They are a group of dedicated individuals capable of working across disciplines, who are team-focused, and results-oriented participants in the process.\nThe Development Team is a cross-functional team of engineers, including senior engineers and a lead engineer, designers, QA testers, and any other roles necessary to build the product.",
+    "_sample_id": 6
+  },
+  {
+    "question": "What is the main problem that Yoda conditions are intended to solve?",
+    "target_chunk_id": "how-we-work_style_js_chunk_19",
+    "target_document_id": "how-we-work_style_js",
+    "expected_output": "### Avoid Yoda conditions, you must\nYoda conditions are confusing and solve the wrong problem. You have my permission to not use Yoda conditions. - RM",
+    "_sample_id": 7
+  },
+  {
+    "question": "What are the default meta boxes provided by WordPress for taxonomies?",
+    "target_chunk_id": "how-we-work_process_architecture_chunk_21",
+    "target_document_id": "how-we-work_process_architecture",
+    "expected_output": "### UI Considerations\nBy default, WordPress contains only two different meta boxes for taxonomies. The categories meta box is used for all hierarchical taxonomies, and the tags meta box for all flat taxonomies.\nIn most cases, these meta boxes are not optimal from a user perspective. Consider using CMB2, which offers a variety of meta boxes for managing taxonomy terms.",
+    "_sample_id": 8
+  },
+  {
+    "question": "What tools are essential for day-to-day development?",
+    "target_chunk_id": "development-tools_chunk_2",
+    "target_document_id": "development-tools",
+    "expected_output": "## Essential Tools\nThese are the key tools you'll *need* for day-to-day development, so make sure you have access to these. You should be given access to these as part of your induction, but if not, ask your Engineering Manager! Make sure to enable two-factor authentication where possible.\n* *Laptop*. Most people use Apple laptops, and much of the guidance here reflects this. You are free to choose an alternative, and we have some engineers who use Windows or Linux, but there may not be so much support available from the rest of the team. Join the slack channels [#interests-linux](https://href.li/?https://slack.com/app_redirect?channel=C8347R134) or [#interests-windows-os](https://href.li/?https://slack.com/app_redirect?channel=CHBG43ML4) if you decide to use one of these platforms.\n* *Git & [GitHub](https://href.li/?https://github.com/humanmade)* We use Github extensively, so you will need a github account. You'll also need git installed on your computer.",
+    "_sample_id": 9
+  },
+  {
+    "question": "What is the primary purpose of GitHub?",
+    "target_chunk_id": "guides_tooling_github_chunk_1",
+    "target_document_id": "guides_tooling_github",
+    "expected_output": "# GitHub",
+    "_sample_id": 10
+  },
+  {
+    "question": "What flexibility is there in choosing development tools at Human Made?",
+    "target_chunk_id": "how-we-work_development-tools_chunk_1",
+    "target_document_id": "how-we-work_development-tools",
+    "expected_output": "# Tools we use\nThis page aims to document some of the tools you need to do your job as an engineer at Human Made.\nSome things are required, but generally we try to be flexible about what you use. If you're already happy with your development setup, you probably won't need to change much. That said, documenting some commonly used tools and configurations is still important.",
+    "_sample_id": 11
+  },
+  {
+    "question": "Who can help resolve larger concerns or interpersonal issues?",
+    "target_chunk_id": "how-we-work_team_communication_chunk_3",
+    "target_document_id": "how-we-work_team_communication",
+    "expected_output": "You should always feel comfortable sharing feedback publicly, but if you'd rather share it privately, you can talk to the relevent people in private; for example on projects, it would often be the project manager. If you are unsure who to talk to, your engineering manager will be able to help work that out with you. Larger concerns can always be raised to the Director of Engineering or CTO if needed, and interpersonal issues can be raised to the Director of People Operations or the partners.",
+    "_sample_id": 12
+  },
+  {
+    "question": "What are some potential issues with using the meta data APIs?",
+    "target_chunk_id": "how-we-work_process_architecture_chunk_27",
+    "target_document_id": "how-we-work_process_architecture",
+    "expected_output": "## Meta Data Handling\nPosts and terms have a fixed database schema, that comes with expectations for the data stored in individual cells. As such there's quite a number of data that cannot be stored in the post and term tables.\nThis is where the post and term meta data APIs come in handy. These APIs give access to the meta tables, which is essentially a key/value storage. The value field is of the SQL type `LONGTEXT`, so it can store up to 4Gb of data.\nThe meta tables are meant to store bits of data that does not fit into any of the fields of the entity table. The functions for storing and retrieving data are easy to use, and complex queries can be run against this table.\nUnfortunately the meta data APIs have a number of gotchas, which can lead to buggy, slow, and fragile implementations.",
+    "_sample_id": 13
+  },
+  {
+    "question": "How can best practices be effectively communicated to team members?",
+    "target_chunk_id": "standards_frontend_best-practices_chunk_1",
+    "target_document_id": "standards_frontend_best-practices",
+    "expected_output": "# Best Practices",
+    "_sample_id": 14
+  },
+  {
+    "question": "What are Content Security Policies and how are they used?",
+    "target_chunk_id": "standards_frontend_security_chunk_4",
+    "target_document_id": "standards_frontend_security",
+    "expected_output": "## CSP (Content Security Policy)\nContent Security Policies allow us to write instructions to the browser, telling it how we want it to behave in certain situations. They are generally sent as a header.\nAlmost every site that we build has use for a Content Security Policy. This use could range from a very simple `upgrade-insecure-requests` all the way to controlling where every script tag and form input on each page are allowed to originate from.\nWhat form and how strict the policies should be will vary by client and application, but every site we build should have some form of CSP. CSPs should be tested thoroughly against the application as they can also break significant portions of a site if not carefully implemented.\n**The generally most useful directives are:**\n* `form-action`\n* `upgrade-insecure-requests`\n* `script-src`, `style-src` (note, use these with caution! This will typically break all inlined scripts that you have not created or passed a nonce to. This is intentional, but could easily break significant portions of your site)\n* `frame-src` (can be used with Protected Embeds to prevent unwanted iframes.)",
+    "_sample_id": 15
+  },
+  {
+    "question": "How does the BEM naming convention denote different levels of items?",
+    "target_chunk_id": "how-we-work_style_css_chunk_8",
+    "target_document_id": "how-we-work_style_css",
+    "expected_output": "## Naming Things\nWe use the BEM naming convention as a general guide for class naming. BEM stands for Block-Element-Modifier and follows the following style of delineation to denote which level of item that we are modifying.\nAn element is delineated by underscores `__`, and a modifier by dashes `--`. All elements of the BEM class should be lowercased.\n`.block__element--modifier { }`\nThis would carry out in the following example.\n```\n.car { /* … */ }\n.car__door { /* … */ }\n.car--blue { /* … */ }\n```\nOur **block** is a car - this represents the whole of what we're styling.\nThen, we have an **element** of `__door` - this represents a single piece of the larger block that we want to style.\nFinally, we have a **modifier** of `--blue` to describe a variation of the car. Perhaps our car was originally red, but we need to style this one as blue.\nYou can read more on BEM [here](https://href.li/?http://getbem.com/naming/).",
+    "_sample_id": 16
+  },
+  {
+    "question": "What are some useful resources for understanding career progression in the engineering world?",
+    "target_chunk_id": "how-we-work_team_progression_chunk_14",
+    "target_document_id": "how-we-work_team_progression",
+    "expected_output": "## Related Reading\nThe following links are useful extra reading to gain an idea of how the wider engineering world thinks about career progression.\n* [On Being a Senior Engineer](https://href.li/?http://www.kitchensoap.com/2012/10/25/on-being-a-senior-engineer/) by John Allspaw (CTO, Etsy)\n* [Ladder vs Lattice](https://href.li/?http://business360.fortefoundation.org/3042/ladder-vs-lattice-why-horizontal-career-moves-can-help-you-climb-higher-faster) by Forté Foundation\n* [The Benefits of Horizontal vs Vertical Growth](https://href.li/?https://www.forbes.com/sites/williamcraig/2016/02/13/the-benefits-of-horizontal-vs-vertical-career-growth/#789918d87547)",
+    "_sample_id": 17
+  },
+  {
+    "question": "What is the recommended location for component styles in JavaScript?",
+    "target_chunk_id": "how-we-work_style_react_chunk_14",
+    "target_document_id": "how-we-work_style_react",
+    "expected_output": "### Styles\nAvoid inline styles in JavaScript.\nComponent styles should be located within a `styles.css` (or `styles.scss`) file in the same directory as the component's JavaScript. Calling `import './styles.css';` from the component will instruct Webpack to include those CSS rules in the compiled project stylesheet.\nGlobal styles should be specified in a top-level stylesheet imported in the application's `index.js`. When using SCSS, reusable styles may also be defined using mixins that you can include from individual components.\n#### CSS Modules & Scoping\nWhen creating components that may be reused across projects it can be useful to scope the component's styles so they will not interfere with other elements. Webpack's `css-loader` includes support for [CSS Modules](https://href.li/?https://github.com/css-modules/css-modules), which you may use to restrict styles to a specific component.",
+    "_sample_id": 18
+  },
+  {
+    "question": "Why is it recommended to use user ID instead of username when referring to WordPress users in data?",
+    "target_chunk_id": "standards_privacy_chunk_14",
+    "target_document_id": "standards_privacy",
+    "expected_output": "### Right to Rectification\nUsers have the [right to have their data rectified](https://href.li/?https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/individual-rights/right-to-rectification/) if it's inaccurate or incomplete.\nSystems should be designed to allow all personal information to be edited. In particular, all user data (including WordPress usernames) should be editable. Similar to the Right to Erasure, this can be directly under the control of the user, or methods to allow the client to enact it can be used.\nWhen referring to WordPress users in data, always use the user ID, as the username may change.",
+    "_sample_id": 19
+  },
+  {
+    "question": "What needs to be added to the composer.json file?",
+    "target_chunk_id": "guides_tooling_composer_chunk_11",
+    "target_document_id": "guides_tooling_composer",
+    "expected_output": "### Configure Composer\nTo make use of packagist.hmn.md you need to do 2 things:\nIn `composer.json` add:\n```\n{\n\t\"repositories\": {\n\t\t\"humanmade-pro\": {\n\t\t\t\"type\": \"composer\",\n\t\t\t\"url\": \"https://packagist.hmn.md/satispress/\"\n\t\t}\n\t}\n}\n```\nCreate `auth.json`, or add to it:\n```\n{\n\t\"http-basic\": {\n\t\t\"packagist.hmn.md\": {\n\t\t\t\"username\": See 1Password,\n\t\t\t\"password\": See 1Password\n\t\t}\n\t}\n}\n```\nMake sure to merge the JSON into any existing properties like `repositories` or `http-basic`.",
+    "_sample_id": 20
+  },
+  {
+    "question": "How does lazy loading images impact user experience?",
+    "target_chunk_id": "standards_frontend_best-practices_chunk_3",
+    "target_document_id": "standards_frontend_best-practices",
+    "expected_output": "* Lazy load images",
+    "_sample_id": 21
+  },
+  {
+    "question": "What should be considered your highest priority when it comes to notifications?",
+    "target_chunk_id": "md_how-we-work_philosophy_chunk_7",
+    "target_document_id": "md_how-we-work_philosophy",
+    "expected_output": "## Check your notifications\n* Open tickets, code reviews and work in progress in a sprint should be considered \"active\", this is your highest priority so monitor your inbox\n* If colleagues/clients are chasing you for code reviews or feedback that you need to address, consider whether you need to reset their expectations or whether you need to be more proactive following up or acknowledging them.",
+    "_sample_id": 22
+  },
+  {
+    "question": "When should return type declarations be used in functions?",
+    "target_chunk_id": "how-we-work_style_php_chunk_16",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "### Return Type Declarations\nUse return type declarations when your function *can only return one type*. This excludes any functions that can return an instance of `WP_Error` or multiple scalar and/or compound types. You may use nullable return types when returning `null` along with one other type.\n```\n// Yes:\nadd_filter( 'excerpt_length', 'modify_excerpt_length' );\nfunction modify_excerpt_length( int $length ) : int {\n    return $length \n\n// Yes:\n\n\n// No:\n\n\n// Yes:\n\n```\nThis only applies to single statements. For multiple statements, these should be expanded into a full multiline statement with semicolons.\n```\n// No:\n\n\n// Yes:\n\n\n// No:\ndisplay_name\n)) ?>\n\n// Yes:\ndisplay_name\n));\n?>\n```",
+    "_sample_id": 23
+  },
+  {
+    "question": "What are the specific criteria for a valid hexadecimal colour code?",
+    "target_chunk_id": "standards_backend_security_chunk_7",
+    "target_document_id": "standards_backend_security",
+    "expected_output": "### Qualifying data\nWhen qualifying data, we try to find out whether it meets a precise set of criteria. Let's look at an example of validating data.\nImagine that you have a meta box that allows users to pick a colour for the website's background. The colour will be stored as a hexadecimal colour code. A value needs to fulfill a precise set of criteria in order to be a valid hexadecimal colour code. These criteria can be expressed as a regular expression, as can be seen in the following test function:\n```\npreg_match( '|^#([A-Fa-f0-9]{3}){1,2}$|', $color )\n```\nAnother example is a meta field which allows users to enter a value for the width (in pixels) of the content area of a particular post. In this case, there might be sensible minimum and maximum dimension values allowed, and a default defined for unspecified values. While not being a super useful feature in a theme, this example allows us to demonstrate the use of `filter_input()`.\nThe `filter_input()` PHP function gets a variable and validates it. The function accepts four arguments: the type of input, the name of the variable to get, the filter (validation) to apply, and an optional array of options.\n```",
+    "_sample_id": 24
+  },
+  {
+    "question": "What topics were updated on July 30, 2026?",
+    "target_chunk_id": "index_chunk_7",
+    "target_document_id": "index",
+    "expected_output": "### Recent edits\n1. [PHPUnit](https://engineering.hmn.md/guides/testing/phpunit/)Last updated on August 14, 2026\n2. [Security](https://engineering.hmn.md/standards/backend/security/)Last updated on August 14, 2026\n3. [Accessibility Testing](https://engineering.hmn.md/guides/testing/accessibility/)Last updated on July 30, 2026\n4. [JavaScript](https://engineering.hmn.md/standards/style/js/)Last updated on July 30, 2026\n5. [Security Functions](https://engineering.hmn.md/guides/wordpress/security-functions/)Last updated on July 30, 2026",
+    "_sample_id": 25
+  },
+  {
+    "question": "What are the three buckets for code location in a project?",
+    "target_chunk_id": "standards_structure_chunk_4",
+    "target_document_id": "standards_structure",
+    "expected_output": "### Code Location\nWhen working on a new piece of code, you need to decide where in the project it should live. Code typically fits into one of three buckets: must-use plugins, plugins, or themes. (Note: \"plugins\" can refer to must-use plugins or regular plugins.)\nTypically, code in `themes` should contain only code related to the frontend. This includes obvious things like HTML output, enqueueing static assets, etc, but can also include significant backend code where it is used only for the frontend. For example, code that transforms internal menu data into a more-easily usable structure for JS would live here.\nIn most projects, the bulk of the backend code should live inside `mu-plugins` as separate modules. Using mu-plugins means the code can assume the whole codebase is active, and ensures that code can be separated as desired by engineers.",
+    "_sample_id": 26
+  },
+  {
+    "question": "How do you make git automatically use an SSH key and email for a specific client?",
+    "target_chunk_id": "guides_tooling_github_chunk_2",
+    "target_document_id": "guides_tooling_github",
+    "expected_output": "## Using different SSH keys and Email per GitHub Organisation\nThis guide shows how to make to make `git` automatically use an SSH key and email, *but only for a specific client*. This works *anywhere* on your machine, without environment variables, `direnv`, or using alias.\nYou'll need this for clients that require developers to use a project-specific Github account, for instance when they have their own GitHub Enterprise account, or require the use of their own accounts and SSO. We'll use this client, and the corresponding `example-org` Github organization as an example.\n**First**, open your global git config file (`.gitconfig` at the root of your Home directory on MacOS) and add the following:\n```\n[includeIf \"hasconfig:remote.*.url:git@github.com:example-org/**\"]\n    path = /Users//dev/example-org/.gitconfig\n```\nNow when interacting with the `example-org` Github organisation it will use the `example-org/.gitconfig` file. You can place this custom Git config file anywhere you want.\n**Second**, open that file and specify 2 parameters:\n```\n[user]\n    email = example@example.com\n[core]\n    sshCommand = \"ssh -i /path/to/ssh/key -o IdentitiesOnly=yes\"\n```",
+    "_sample_id": 27
+  },
+  {
+    "question": "Is it recommended to use Yoda conditions in coding?",
+    "target_chunk_id": "standards_style_js_chunk_19",
+    "target_document_id": "standards_style_js",
+    "expected_output": "### Avoid Yoda conditions, you must\nYoda conditions are confusing and solve the wrong problem. You have my permission to not use Yoda conditions. - RM",
+    "_sample_id": 28
+  },
+  {
+    "question": "What are the guidelines for structuring projects at the file level?",
+    "target_chunk_id": "standards_chunk_1",
+    "target_document_id": "standards",
+    "expected_output": "# Standards\n* [File Structure](/standards/structure/)\nHow to structure projects at the file level, both general and specific to plugins and themes, respectively.\n* [Documentation](/standards/documentation/)\nCode should be commented thoroughly, and here's how to do it.\n* [Privacy](/standards/privacy/)\nGuidelines on (meeting) privacy requirements.\n* [Performance](/standards/performance/)\nConsiderations on algorithmic complexity and performance.\n* [Best Practices](/standards/best-practices/)\nHow and when to utilize best practices.\n* [Frontend](/standards/frontend/)\nFrontend-specific standards.\n* [Backend](/standards/backend/)\nBackend-specific standards.\n* [Style Guides](/standards/style/)\nVarious style guides for the different technologies we use.\nTo ensure everyone's able to work effectively and efficiently, we enforce a number of standards across our code. Some of these are for performance and security in high-traffic, high-impact sites, while some enable us to collaborate more effectively.\nWhile projects can deviate from these standards (and we encourage experimenting with new standards), projects tend to follow the majority of these rules and guidelines.",
+    "_sample_id": 29
+  },
+  {
+    "question": "What are the benefits of fitting into the style of an existing project?",
+    "target_chunk_id": "standards_best-practices_chunk_3",
+    "target_document_id": "standards_best-practices",
+    "expected_output": "## Be Consistent\nWhen working with existing projects (such as retainer projects), you should always aim to fit into the style of the existing project, even if best practices have evolved since. Unless it is truly advantageous to switch the project to a different style (which it rarely is), avoid doing so, as it's unnecessary work. This applies to the codebase as well as the tooling around it.\nSome of our long-running projects have through many standards iterations, and may follow older design patterns. Additionally, project tech leads may make different decisions for projects for many reasons, including experimentation, fitting with a client's team, or integrating with legacy code. You should aim to be consistent with these deviations to ensure the codebase exists as a whole piece of work, rather than disjointed updates.\nFor entirely new subsystems within a project, you need to gauge whether deviating from the rest of the project is worth it. If the new code is expected to be significant, and is essentially the future of the project, it may be worth using newer processes to allow you to move faster.",
+    "_sample_id": 30
+  },
+  {
+    "question": "What is the purpose of semicolons in JavaScript?",
+    "target_chunk_id": "standards_style_js_chunk_16",
+    "target_document_id": "standards_style_js",
+    "expected_output": "### Semicolons\nSemicolons should end every statement in JS.\n```\nconst obj0 = { key1: 'value1', key2: 'value2' };\n\nconst DestructuredAssignment = props => {\n    const { content, title, id } = props;\n    // ...\n};\n```",
+    "_sample_id": 31
+  },
+  {
+    "question": "What happens to archive queries when they are customised?",
+    "target_chunk_id": "how-we-work_process_architecture_chunk_26",
+    "target_document_id": "how-we-work_process_architecture",
+    "expected_output": "## Customising Built-In Archives\nWordPress offers different types of built-in archives, like date and author archives, as well as two built-in taxonomies, tags and categories.\nThese archives are fast, because the queries behind them are all fast. Whenever these queries are customised, they become more complex, and therefore slower.",
+    "_sample_id": 32
+  },
+  {
+    "question": "How should descriptions be written in the imperative form?",
+    "target_chunk_id": "standards_style_php_chunk_13",
+    "target_document_id": "standards_style_php",
+    "expected_output": "## Inline Documentation\nGenerally, follow [the WordPress rules on inline documentation](https://href.li/?https://make.wordpress.org/core/handbook/best-practices/inline-documentation-standards/php/).\nAn exception is made for the description. Descriptions should be written in the imperative (as a command) rather than third-person indicative. This is the **opposite** of what WordPress coding standards recommend.\nWhen conjugating, pretend you're commanding someone to do something. (The imperative generally follows the same rules as second-person indicative.)\n* No: \"Displays the date.\"\n* Yes: \"Display the date.\"\nThis is an intentional stylistic choice and deviation from the WordPress coding standards. The WordPress standards produce an incomplete sentence, missing a subject, which can be confusing.\nThe short description should be able to replace the function name. Doing this for all your functions should produce a sentence that describes what you're doing.\n* No: \"Queries the database. Formats the data for output.\"\n* Yes: \"Query the database. Format the data.\"",
+    "_sample_id": 33
+  },
+  {
+    "question": "What are the main benefits of using the Scrum framework in a team?",
+    "target_chunk_id": "how-we-work_process_agile_chunk_1",
+    "target_document_id": "how-we-work_process_agile",
+    "expected_output": "# Agile & Scrum\nProjects at Human Made follow an agile approach, typically following the Scrum framework. This helps us move faster and work together better as a team, while ensuring engineers can get work done without constantly being blocked.\nAgile and Scrum approaches use some specific terminology and processes that you should get to know. While it might seem like a lot to learn, most of the time this is just putting better names on things you're already doing, as well as systematising things to avoid guesswork. The process is here to help the whole team produce great products, and should help you be more effective and productive in your job.\nOne of the big advantages of Scrum for engineers is that it's self-directed: the Scrum Master doesn't tell you what to do. Once the whole team has decided on the direction you get to work together on delivery and are empowered to do it in the way you see fit.\nWith that great freedom though comes equally great responsibility.\nWhen you are on a Scrum team, we trust that:\n* You have the power to solve the problem - issues won't have detailed specs about HOW to build what we need, we'll leave that to you and the team.",
+    "_sample_id": 34
+  },
+  {
+    "question": "What are the characteristics of 'logic' components in React?",
+    "target_chunk_id": "standards_style_react_chunk_17",
+    "target_document_id": "standards_style_react",
+    "expected_output": "### Make \"presentation\" components \"pure\"\nIt's useful to think of the React world as divided into [\"logic\" components and \"presentation\" components](https://href.li/?https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0).\n\"Logic\" components have application logic, but do not emit HTML themselves.\n\"Presentational\" components are typically reusable, and do emit HTML.\nLogic components can have internal state, but presentational components never should.",
+    "_sample_id": 35
+  },
+  {
+    "question": "Why may some rules not make sense in a React project?",
+    "target_chunk_id": "standards_style_react_chunk_1",
+    "target_document_id": "standards_style_react",
+    "expected_output": "# React\nReact project style should follow the normal [JavaScript style guide](/standards/style/js/), with the addition of several React-specific rules. Much of the below is based on [Khan Academy's style guide](https://href.li/?https://github.com/Khan/style-guides/blob/master/style/react.md) and various other industry standards.\nBecause conventions in React differ from the established conventions for traditional WordPress projects, some of these rules may not make sense in every case. We encourage you to understand the techniques used by the broader React ecosystem so you can make an informed decision about when to apply or ignore a specific recommendation.\n---",
+    "_sample_id": 36
+  },
+  {
+    "question": "What is the primary concern when it comes to performance in large-scale projects?",
+    "target_chunk_id": "standards_backend_performance_chunk_1",
+    "target_document_id": "standards_backend_performance",
+    "expected_output": "# Performance\nPerformance is very important with the scale of the sites we work on. If it's not performant, it cannot ship. However, it's important to be pragmatic; performance is a rabbit hole that you can spend infinite time on. Shipping mostly-performant code is better than not shipping, and you can always incrementally improve it later.\nDetermining what is or isn't performant is tough, and this role mostly falls on the code author. However, performance should also be checked during review, especially for external plugins that may not have been created with performance in mind.",
+    "_sample_id": 37
+  },
+  {
+    "question": "What is the primary goal of Human Made's approach to engineering work?",
+    "target_chunk_id": "how-we-work_philosophy_chunk_1",
+    "target_document_id": "how-we-work_philosophy",
+    "expected_output": "# Philosophy\nAt Human Made we strive to provide our clients with **value** above all else. With that in mind, the following pages outline a framework for how to approach engineering work.",
+    "_sample_id": 38
+  },
+  {
+    "question": "Which companies are using the system?",
+    "target_chunk_id": "platform_deploys_chunk_2",
+    "target_document_id": "platform_deploys",
+    "expected_output": "### Secure, scalable, and flexible. Serving over 38 billion requests every year.\nKawasaki\nDigital Trends\nStandard Chartered\nKaplan\nDocebo\nNerdwallet",
+    "_sample_id": 39
+  },
+  {
+    "question": "How do let and const variables behave in terms of variable hoisting?",
+    "target_chunk_id": "how-we-work_style_js_chunk_10",
+    "target_document_id": "how-we-work_style_js",
+    "expected_output": "\n    if ( condition ) {\n        x = 1;\n    }\n}\n\n// Prefer:\n\nfunction () {\n    something();\n\n    let x;\n    if ( condition ) {\n        x = 1;\n    }\n}\n```\nFinally, note that `let` and `const` are not subject to [variable hoisting](https://href.li/?https://developer.mozilla.org/en-US/docs/Glossary/Hoisting). A variable declared with `let` or `const` may not be referenced until after it is declared.",
+    "_sample_id": 40
+  },
+  {
+    "question": "Why is it important to have a clear description of an issue?",
+    "target_chunk_id": "how-we-work_process_development_chunk_2",
+    "target_document_id": "how-we-work_process_development",
+    "expected_output": "## Steps\nThe general process for development is:\n0. **Determine MVP for the issue**\nBefore you start, make sure the issue is broken down to the minimum viable product. If it can be broken up into multiple issues, it should be. This allows better isolation of work, and better tracking for the project managers.\nIssues should succinctly describe how to fix them. Vague descriptions make it hard to know when the issue is complete, and can make it harder for other people to get involved in the project.\n1. **Take the issue**\nWhen working on an issue, make sure you're not overlapping with existing work. This is typically handled by assigning the issue to yourself, but could also be via a kanban board (ZenHub or GitHub Projects) depending on the project.\n2. **Write the code!**\nYou've done the easy bits, now it's time to actually do the work.\nThis work needs to happen on a branch. You can call this whatever you want; common patterns are `{issue_number}-{name_of_feature}` (e.g. `42-add-chicken-nuggets`) or simply `{name-of-feature}` (`add-chicken-nuggets`).\n3. **Push early, push often**",
+    "_sample_id": 41
+  },
+  {
+    "question": "What is the purpose of using visibility keywords in class methods and properties?",
+    "target_chunk_id": "standards_style_php_chunk_12",
+    "target_document_id": "standards_style_php",
+    "expected_output": "## Visibility (Public/Protected/Private)\nClass methods and properties should always be marked with a visibility keyword, one of `public`, `protected` or `private`. Generally speaking, `private` should be avoided in favour of `protected`, as it doesn't allow subclasses to access the method. In most cases, this is an unnecessary hindrance, and leads to subclasses simply copy-and-pasting the code when they need to override it.\n```\n// No:\nclass MyClass {\n    var $foo = 1;\n    function __construct() {}\n}\n\n// Yes:\nclass MyClass {\n    protected $foo = 1;\n    public function __construct() {}\n}\n```",
+    "_sample_id": 42
+  },
+  {
+    "question": "What functionality depends on the presence of a shortlink?",
+    "target_chunk_id": "how-we-work_process_architecture_chunk_12",
+    "target_document_id": "how-we-work_process_architecture",
+    "expected_output": "As an example you could have a cron job that retrieves a shortlink from an external service when a post is published. The publicise to Twitter functionality that depends on the presence of the shortlink could then be scheduled once the shortlink has been retrieved and saved successfully.",
+    "_sample_id": 43
+  },
+  {
+    "question": "What is the recommended native focusable element to add an onClick action to?",
+    "target_chunk_id": "how-we-work_style_react_chunk_4",
+    "target_document_id": "how-we-work_style_react",
+    "expected_output": "### Use semantic HTML5\nAlthough it is tempting to add all functionality to DIVs, keep in mind that the HTML5 you are writing with React must be [semantically meaningful and validating](/standards/style/markup/).\nOnly put an onClick action on a native focusable element, like a ``.\n```\n// Avoid:\nrender() {\n    return (\n         this.props.onClick() }>\n            { /* ... */ }\n        \n    }\n}\n\n// Prefer:\nrender() {\n    return (\n         { e.preventDefault(); this.props.onClick() } }\n        >\n            { /* ... */ }\n        \n    );\n}\n```",
+    "_sample_id": 44
+  },
+  {
+    "question": "What does CSS stand for?",
+    "target_chunk_id": "standards_style_css_chunk_1",
+    "target_document_id": "standards_style_css",
+    "expected_output": "# CSS",
+    "_sample_id": 45
+  },
+  {
+    "question": "How do you add `propTypes` to a React component?",
+    "target_chunk_id": "standards_style_react_chunk_19",
+    "target_document_id": "standards_style_react",
+    "expected_output": "### Use [propTypes](https://href.li/?https://github.com/facebook/prop-types)\nThe `prop-types` npm module is used to declare the properties that a React component expects or needs to receive in order to render properly. Properties may be restricted to a specific type or set of types, marked as required, or even deeply checked against a specific object structure.\nTo use PropTypes, install and import the `prop-types` package to your React component, then add a `.propTypes` property to that component:\n```\nimport PropTypes from 'prop-types';\nimport React, { PureComponent } from 'react';\n\nclass MyComponent extends PureComponent {}\n\nMyComponent.propTypes = {\n    // Declare propTypes here\n};\n```\nEvery React component should specify `propTypes` for all properties it may receive: if it exists in `this.props`, it should have a `propTypes` declaration. This raises data errors early during development, and avoids edge cases related to type issues in production.\n```\nMyComponent.propTypes = {\n    // You can declare that a prop is a specific JS primitive.\n    // By default, propTypes arguments are optional:\n    optionalArray: PropTypes.array,\n    optionalBool: PropTypes.bool,",
+    "_sample_id": 46
+  },
+  {
+    "question": "When should you consider using {namespace}.php for a namespace?",
+    "target_chunk_id": "how-we-work_style_php_chunk_4",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "### Namespaced File Naming\nNamespaced functions and constants should live in `namespace.php` in the namespace's directory or in a file named `{namespace}.php` in the parent namespace's directory.\nChoosing the correct namespace naming strategy is important for project organization. Going the `namespace.php` route is standardized and simple, but commonly leads to a collection of un-associated functions, reducing discoverability and clarity. Alternatively, going with `{namespace}.php` will improve discoverability but can lead to many small files which can become difficult to maintain as time goes on. Both philosophies have their place and use.\nGenerally speaking, if you have classes or sub-namespaces within a namespace, you should use `namespace.php`. This ensures that the code within a namespace lives together in a single directory. Consider using `{namespace}.php` for standalone namespaces with only functions.\nAs an example, for a plugin called \"hm-coffee\" with a namespace of `HM\\Coffee`, the directory structure should look like this:\n* `plugin.php` - Declares autoloader for `HM\\Coffee` and runs bootstrap functions\n* `inc/` - Contains PHP code for `HM\\Coffee` namespace",
+    "_sample_id": 47
+  },
+  {
+    "question": "What is the condition for a feature to be considered truly necessary?",
+    "target_chunk_id": "standards_privacy_chunk_7",
+    "target_document_id": "standards_privacy",
+    "expected_output": "For optional features (for example, email marketing, or further analytics), explicit consent should be gained from the user. This must follow [specific rules](https://href.li/?https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-consent-valid_en) for gaining the consent of the user. In particular, it must be **freely given** (not tied to another, required action), it must be **explicit** via a positive act (such as an opt-in checkbox; opt-out checkboxes are not valid consent), and it must be able to be **withdrawn**.\nIt is important to carefully identify whether a feature is truly necessary. A feature cannot be claimed as necessary simply to work around the GDPR rules. If a user would not reasonably expect a feature, then it must instead use explicit consent.",
+    "_sample_id": 48
+  },
+  {
+    "question": "What is the least reliable solution for job scheduling?",
+    "target_chunk_id": "how-we-work_process_architecture_chunk_3",
+    "target_document_id": "how-we-work_process_architecture",
+    "expected_output": "### Job Scheduling System\nAn asynchronous job handler is a requirement for every application. The least reliable solution is WP Cron, so often Linux crons can be used. Certain hosts offer a separate job infrastructure that is independent of web requests, which is the ideal scenario.\nThe critical point here is the reliability of the job scheduling system. The better the system, the more the architecture can rely on it.",
+    "_sample_id": 49
+  },
+  {
+    "question": "Where can you find additional resources for help with a problem?",
+    "target_chunk_id": "how-we-work_philosophy_chunk_3",
+    "target_document_id": "how-we-work_philosophy",
+    "expected_output": "## Assume every problem has already been solved\n* Don't dive immediately into code, stop and think\n* Search the web\n* Search the [HM GitHub org](https://href.li/?https://github.com/humanmade)\n* Search the [Dev H2](https://dev.hmn.md/)\n* Ask in [Slack #dev](https://href.li/?https://hmn.slack.com/archives/C03K3J34A) or the Dev H2",
+    "_sample_id": 50
+  },
+  {
+    "question": "What are the desired goals for the metrics?",
+    "target_chunk_id": "standards_frontend_performance_chunk_4",
+    "target_document_id": "standards_frontend_performance",
+    "expected_output": "* From this data, create the desired goals for the 3-5 metrics\nThe result of the above work can be used throughout a project (and during the lifetime of a site) as a measure to ensure that performance is where it should be.",
+    "_sample_id": 51
+  },
+  {
+    "question": "What information does the title attribute typically provide?",
+    "target_chunk_id": "standards_style_markup_chunk_4",
+    "target_document_id": "standards_style_markup",
+    "expected_output": "## Title attribute",
+    "_sample_id": 52
+  },
+  {
+    "question": "When is storing third party API data in a database not a concern?",
+    "target_chunk_id": "how-we-work_process_architecture_chunk_13",
+    "target_document_id": "how-we-work_process_architecture",
+    "expected_output": "### Third Party Data Handling\nWhen dealing with third party APIs, the question becomes how much of the API data needs to be stored in the database of the consumer site.\nIf the database contents do not need to be kept in synchronisation with the API, then this is not as much of a concern.\nAn example would be a shortlink API: these links stay the same as long as the link of the content stays the same. Another example would be media",
+    "_sample_id": 53
+  },
+  {
+    "question": "What is the primary role of the Scrum Master?",
+    "target_chunk_id": "how-we-work_process_agile_chunk_5",
+    "target_document_id": "how-we-work_process_agile",
+    "expected_output": "### Scrum Master\nThe Scrum Master is the facilitator. They provide the interface between the PO and the Development Team, running interference, clearing blockers, and generally supporting the Dev Team with whatever they need to get on with the job without interruption.\nThe Scrum Master role is typically filled in projects by project managers, but may be filled in smaller or internal projects by the lead engineer.",
+    "_sample_id": 54
+  },
+  {
+    "question": "When should you consider creating a custom solution instead of using community tools?",
+    "target_chunk_id": "md_how-we-work_philosophy_chunk_11",
+    "target_document_id": "md_how-we-work_philosophy",
+    "expected_output": "## Favour community tools\n* Use WordPress core build tools whenever possible\n* If you hit limitations, try to solve them for the wider community rather than going bespoke straight away",
+    "_sample_id": 55
+  },
+  {
+    "question": "What are the key libraries and components used in this context?",
+    "target_chunk_id": "standards_style_react_chunk_23",
+    "target_document_id": "standards_style_react",
+    "expected_output": "## Libraries and components",
+    "_sample_id": 56
+  },
+  {
+    "question": "What is the typical directory for JavaScript test files in a React project?",
+    "target_chunk_id": "standards_structure_chunk_7",
+    "target_document_id": "standards_structure",
+    "expected_output": "## Plugin Structure\nPlugins should follow a consistent file structure:\n* `plugin.php` - The main plugin file.\n* `inc/` - The plugin's backend/PHP code.\n* `assets/` - Directory containing any static assets:\n+ `css/` - CSS to be served to the frontend.\n+ `scss/` - SCSS source files, if in use.\n+ `js/` - JavaScript files.\n+ `images/` - Images.\n* `tests/` - PHP test files.\n* `README.md` - Plugin readme, if desired.\nPlugins with complex JavaScript frontends (such as React single-page apps) may wish to use a slightly different structure for frontend assets. This structure better matches the ecosystem tooling:\n* `src/` - Source JavaScript and CSS files.\n* `build/` - Built assets, typically generated by [Webpack and Babel](/guides/tooling/javascript/)\n* `tests/` - Test files.\n+ `js/` - JavaScript test files.\n+ `php/` - PHP test files.\nInstead of duplicating your `src/` folder structure in a top-level test directory, in many React projects JavaScript unit tests are [colocated](/standards/style/react#colocate-javascript-unit-tests) alongside their associated module. Because this differs from our PHP testing conventions, electing this scheme is left to teams' preference.",
+    "_sample_id": 57
+  },
+  {
+    "question": "What is the naming convention for a file containing a class in WordPress?",
+    "target_chunk_id": "standards_style_php_chunk_3",
+    "target_document_id": "standards_style_php",
+    "expected_output": "## File Naming\nNamespaces are mapped to filesystem directories after lowercasing. Part of the namespace may be excluded from the directory structure, ala PSR-4. For example, classes and functions in the `HM\\Some\\Example` could live in the `base/hm/some/example` directory, or the `HM` could be excluded for `base/some/example`.\nFiles containing a class should be named `class-.php`, all lowercase, to fit with the WordPress coding standards.\nThe main file for plugins should live in `plugin.php` in the plugin's directory, while the main file for themes is `functions.php` in the theme directory. This file should be the only one to contain run code. This file should also register necessary autoloaders.\nUnderneath the top-level directory (either the plugin directory or the theme directory) should be an `inc` directory which represents the top-level namespace for the plugin/theme.",
+    "_sample_id": 58
+  },
+  {
+    "question": "What is the conventional structure for colocating JavaScript unit tests in modern React applications?",
+    "target_chunk_id": "standards_style_react_chunk_13",
+    "target_document_id": "standards_style_react",
+    "expected_output": "```\nsrc/\n    components/\n        MyComponent/\n            (All related component files)\n        AnotherComponent.js\n```\n#### Colocate JavaScript Unit Tests\nUnlike PHP, in modern React applications it is conventional to co-locate your JavaScript test files alongside the modules being tested. Because this differs from the structure we use for PHP testing we do not require or enforce this organization scheme, but present it as an example of best practices within the broader React community.\n```\nMyComponent/\n    index.js\n    MyComponent.test.js\n```\nColocating tests can make it easier to see what files completely lack tests, and they simplify the import code within the test files as all imports are now relative to the module under test. Some teams find this structure also supports test-driven development. `create-react-app` and other bootstrapping tools assume co-located tests will be used, and modern test runners like [Jest](https://href.li/?https://jestjs.io/) will automatically detect and run these `*.test.js` files.",
+    "_sample_id": 59
+  },
+  {
+    "question": "How does the function handle duplicate post IDs?",
+    "target_chunk_id": "standards_performance_chunk_7",
+    "target_document_id": "standards_performance",
+    "expected_output": "function count_children( array $posts ) {\n    $children = [];\n    foreach ( $posts as $post ) {\n        $children[ $post->ID ] = 0;\n\n        foreach ( $posts as $children ) {\n            if ( $post->ID === $children ) {\n                $children[ $post->ID ]++;\n            }\n        }\n    }\n    return $children;\n}\n```",
+    "_sample_id": 60
+  },
+  {
+    "question": "Which WordPress functions have built-in caching capabilities?",
+    "target_chunk_id": "standards_backend_performance_chunk_3",
+    "target_document_id": "standards_backend_performance",
+    "expected_output": "At the scale of the sites we're working on, it's often useful to cache *every* post query, particularly those used in utility functions. WordPress doesn't cache these out of the box as the cache hit rate would be very low, but when we can predict that a query will happen repeatedly, we can cache it at a higher level. (Plugins are available that will handle this for you automatically, including the [Advanced Post Cache](https://href.li/?https://github.com/Automattic/advanced-post-cache) plugin which is included on VIP sites.)\nWhere possible, use cached functions in WordPress, as these have already handled the caching for you. This includes most high-level functions around data, including `get_post()`, `get_post_meta()`, `get_option()`, and many more. If in doubt, check the WordPress source for `wp_cache_get()` calls, or ask a friendly colleague.",
+    "_sample_id": 61
+  },
+  {
+    "question": "What plugins are required for certain hosts?",
+    "target_chunk_id": "how-we-work_process_architecture_chunk_5",
+    "target_document_id": "how-we-work_process_architecture",
+    "expected_output": "### Platform Code\nCertain hosts require the use of specific WordPress plugins, and have an assortment of recommended plugins.\nThis should be considered when designing features, as hosts are required to provide support for their code.",
+    "_sample_id": 62
+  },
+  {
+    "question": "What are some examples of industry terms that have been replaced with more inclusive language?",
+    "target_chunk_id": "standards_naming-things_chunk_3",
+    "target_document_id": "standards_naming-things",
+    "expected_output": "## Examples\nThe intention of these guidelines are to focus on the principles that you should follow, rather than providing a definitive list of terms you should avoid, however here are some real-life examples in which language used was improved to be more inclusive.\n* The terms \"Master/Slave\" were fairly established industry terms used to describe technical operations and relationships. However there are clear issues here and in recent years, many within the industry have moved away from the use of these terms in this context in favour of more descriptive language such as \"Primary/Replica\". [See for example this changeset in Python](https://href.li/?https://bugs.python.org/issue34605).\n* The 2011 Scrum Guide included the term \"Backlog grooming\" to describe a meeting in which items in the backlog are prepared for inclusion in the next sprint. Due to problematic connotations with the term ‘grooming', it was replaced with \"Backlog Refinement\" in the 2013 guide.",
+    "_sample_id": 63
+  },
+  {
+    "question": "What is the main difference between `var` and `const` in variable declaration?",
+    "target_chunk_id": "how-we-work_style_js_chunk_8",
+    "target_document_id": "how-we-work_style_js",
+    "expected_output": "### Variable declaration\n`const` & `let` should be used in place of `var` when declaring variables.\n`const` should be used in most cases. Note that `const` means that a variable may not be *re-assigned* later, not that it is immutable. Complex types like Objects and Arrays may be declared with `const` then later mutated, and only re-assignment will cause an error:\n```\nconst primitiveValue = 'forty-two';\nconst obj = {};\n\n// These would error:\nprimitiveValue = 42;\nobj = function() {};\n\n// This will not error:\nobj.property = 42;\n```\n`let` should be used only if you will need to re-assign the variable's value.\n```\n// Avoid:\n\nfor ( var i = 0; i  console.log( i ) );\n}\n//=> 5 5 5 5 5\n\nlet obj = [ 'only assigned once' ];\n\nvar str = 'default value';\nif ( condition ) {\n    str = 'other value maybe assigned later';\n}\n\n// Prefer:\n\nfor ( let i = 0; i  console.log( i ) );\n}\n//=> 0 1 2 3 4\n\nconst obj = [ 'only assigned once' ];\n\nlet str = 'default value';\nif ( condition ) {\n    str = 'other value maybe assigned later';\n}\n```",
+    "_sample_id": 64
+  },
+  {
+    "question": "What should be included in the main plugin.php file?",
+    "target_chunk_id": "standards_structure_chunk_8",
+    "target_document_id": "standards_structure",
+    "expected_output": "### `plugin.php`\nYour main `plugin.php` file should include the [plugin header comment](https://href.li/?https://developer.wordpress.org/plugins/the-basics/header-requirements/) and any plugin constants (such as `const FILE = __FILE__` for easiest use of `plugins_url()` and related functions). It should load in any namespace files, register any autoloaders, and handle the initial hooking into WordPress.\n**This file should be the only file to contain [side-effects](/standards/style/php/#file-layout) (function calls outside a function).**\nFor complex plugins, you may want to move the actual `add_action`/`add_filter` calls into a main function in the namespace, and simply call that function from `plugin.php`. (This function is typically named `bootstrap()` or `setup()` to indicate it is responsible for setting up the plugin's behaviour.)\nFor super-simple plugins with only a handful of functions, you can declare functions in this file as well. This should be done sparingly, as you'll need to ignore the coding standards checks on the file; if in doubt, split the functions out.",
+    "_sample_id": 65
+  },
+  {
+    "question": "What part of the development lifecycle does Altis cover?",
+    "target_chunk_id": "platform_deploys_chunk_5",
+    "target_document_id": "platform_deploys",
+    "expected_output": "### The end-to-end WordPress solution for productive teams\nWe know your cloud hosting is just one part of the overall picture.\nWe've built Altis to help your team across the whole development lifecycle.\n[Learn more →](/developers/)",
+    "_sample_id": 66
+  },
+  {
+    "question": "What are the WordPress rules on inline documentation?",
+    "target_chunk_id": "standards_style_php_chunk_13",
+    "target_document_id": "standards_style_php",
+    "expected_output": "## Inline Documentation\nGenerally, follow [the WordPress rules on inline documentation](https://href.li/?https://make.wordpress.org/core/handbook/best-practices/inline-documentation-standards/php/).\nAn exception is made for the description. Descriptions should be written in the imperative (as a command) rather than third-person indicative. This is the **opposite** of what WordPress coding standards recommend.\nWhen conjugating, pretend you're commanding someone to do something. (The imperative generally follows the same rules as second-person indicative.)\n* No: \"Displays the date.\"\n* Yes: \"Display the date.\"\nThis is an intentional stylistic choice and deviation from the WordPress coding standards. The WordPress standards produce an incomplete sentence, missing a subject, which can be confusing.\nThe short description should be able to replace the function name. Doing this for all your functions should produce a sentence that describes what you're doing.\n* No: \"Queries the database. Formats the data for output.\"\n* Yes: \"Query the database. Format the data.\"",
+    "_sample_id": 67
+  },
+  {
+    "question": "What alternative methods can be used to track page views?",
+    "target_chunk_id": "standards_backend_performance_chunk_6",
+    "target_document_id": "standards_backend_performance",
+    "expected_output": "## Avoid Writes on Page Views\nYou should avoid writing to the database on page views. Writing anything simply when a page is loaded is a surefire way to kill the database. This applies on any page view, including regular frontend pages and dashboard pages. You should only write to the database after a form submission (or Ajax `PUT` or `POST` request). (Note that this also applies to the filesystem, but you shouldn't write to the filesystem anyway.)\nWrites to the database can cause row or table locking, in addition to invalidating the various caches throughout WordPress and the database. Additionally, it means that pages cannot be cached properly.\nIf you need to track page views or similar, consider a dedicated service, including external services like Google Analytics. You're often better off using these and pulling data back to the site via their API. (This is how [hm-top-posts](https://href.li/?https://github.com/humanmade/hm-top-posts) works, for example.) WordPress is built for a read-heavy workload, whereas analytics are a write-heavy workload, so a dedicated service built for analytics is usually a better option.",
+    "_sample_id": 68
+  },
+  {
+    "question": "How are event handlers defined in the provided example?",
+    "target_chunk_id": "how-we-work_style_react_chunk_9",
+    "target_document_id": "how-we-work_style_react",
+    "expected_output": "### Name event handlers `onEventName`\nThis is consistent with React's event naming: `onClick`, `onDrag`, `onChange`, etc.\nExample:\n```\n this.onClick( e ) } onLaunchMissiles={ num => this.onLaunchMissiles( num ) } />\n```\n```\nComponent.propTypes = {\n    onLaunchMissiles: PropTypes.func.isRequired,\n    onScram: PropTypes.func.isRequired,\n};\n```",
+    "_sample_id": 69
+  },
+  {
+    "question": "How can web fonts be loaded efficiently to improve perceived performance?",
+    "target_chunk_id": "standards_frontend_best-practices_chunk_2",
+    "target_document_id": "standards_frontend_best-practices",
+    "expected_output": "## Perceived Performance\nPerceived performance is how performant the user perceives the site, as opposed to the technical measurements of performance. While technical performance is important, perceived performance can have a greater effect on the users willingness to stay on the site.\nPerceived performance is typically measured as the time it takes for the content to be usable, this may occur before assets have finished rendering (images, fonts, JavaScript).\nPerceived performance can be improved by\n* Using system fonts\n* If web fonts are used, initial render ought to use system fonts and switch to the web font once it completes loading (FOUT). In recent browsers this can be achieved in CSS using [`font-display: swap`](https://href.li/?https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display) in older browsers the [Font Face Observer](https://href.li/?https://fontfaceobserver.com/) JavaScript library can be used.\n* Avoid unnecessary jumps.\n* As assets load, images, advertisements, video and other embeds, they can cause text content to jump around on the page. Avoid this by using CSS and/or width and height attributes to allow space for this content to fill.",
+    "_sample_id": 70
+  },
+  {
+    "question": "How does the syntax for methods change from ES5 to ES6?",
+    "target_chunk_id": "standards_style_js_chunk_3",
+    "target_document_id": "standards_style_js",
+    "expected_output": "### Classes\nES6 includes a `class` syntax which should be used instead of ES5-style constructor functions and prototype methods.\nFor example, in ES5 you would add methods to a function's prototype:\n```\nvar MyClass = function () {\n    this.something = 0;\n};\nMyClass.prototype.add = function () {\n    this.something++;\n};\n```\nIn ES6, this is now written:\n```\nclass MyClass {\n    constructor() {\n        this.something = 0;\n    }\n\n    add() {\n        this.something++;\n    }\n}\n```\nMethods should have one empty line between them (i.e. `}\\n\\n`).",
+    "_sample_id": 71
+  },
+  {
+    "question": "What is the name of the text?",
+    "target_chunk_id": "how-we-work_philosophy_built-to-last_chunk_1",
+    "target_document_id": "how-we-work_philosophy_built-to-last",
+    "expected_output": "# Built to Last",
+    "_sample_id": 72
+  },
+  {
+    "question": "How do you create a performance budget?",
+    "target_chunk_id": "standards_frontend_performance_chunk_5",
+    "target_document_id": "standards_frontend_performance",
+    "expected_output": "### Related Reading\n* [Performance Budget Builder](https://href.li/?http://bradfrost.com/blog/post/performance-budget-builder/)\n* [How to Make a Performance Budget](https://href.li/?https://v3.danmall.com/articles/how-to-make-a-performance-budget/)",
+    "_sample_id": 73
+  },
+  {
+    "question": "What are some potential drawbacks of using large frameworks or libraries?",
+    "target_chunk_id": "standards_style_css_chunk_24",
+    "target_document_id": "standards_style_css",
+    "expected_output": "### Using Libraries\nAt the scale of projects Human Made typically takes on, rolling your own is more time-effective and less frustrating than using libraries for styling. However, there are certain situation where a library can be useful and used wholesale.\nFor example, using [sanitize.css](https://href.li/?https://github.com/jonathantneal/sanitize.css) can give a project a solid baseline and consistency. It will be used across an entire site and the whole library is used wholesale. It provides consistency and can simply be imported and forgotten.\nA large frameworks or library such as Bootstrap or Font Awesome is unlikely to be the right solution for the projects that we build and should not be used. You will likely only use a tiny portion of the entire library, leaving the rest as unused orphan code that provides no benefit and adds to the complexity of the codebase.",
+    "_sample_id": 74
+  },
+  {
+    "question": "What are the two parameters that most assertions take?",
+    "target_chunk_id": "guides_testing_phpunit_chunk_3",
+    "target_document_id": "guides_testing_phpunit",
+    "expected_output": "The assertion we wrote could be written a different way:\n```\n$this->assertSame( true, $should_be_true );\n```\n`assertSame` checks the value and type of the two variables matches, and is equivalent to `assertTrue( true === $should_be_true )`. While we could use either here, it's best to use the most specific assertion possible. This generates precise error messages.\nMost assertions take two parameters: `$expected` and `$actual`. You should always pass the expected value first to ensure the error messages match what you'd expect.\nMost assertions also take an optional last parameter `$message` which lets you specify a custom error message to be displayed next to the assertion message. You should only use this parameter when it's unclear why this assertion didn't match based on the built-in error message.\nRather than writing custom messages, name your methods descriptively. If your `test_plugin_loaded` test fails, that's enough information to debug without needing a custom message.\nCongratulations, you just wrote your first PHPUnit test class! Almost every test you'll ever write follows the same pattern: run code, and check the result matches what you expect using assertions.",
+    "_sample_id": 75
+  },
+  {
+    "question": "Why is it difficult to debug unbounded queries?",
+    "target_chunk_id": "standards_backend_performance_chunk_4",
+    "target_document_id": "standards_backend_performance",
+    "expected_output": "## Unbounded Queries\nIt's super easy to kill a large site by forgetting to put a limit on your query. Queries should always have an upper bound to ensure you don't try and load 400,000 posts into memory. This can be tough to spot locally with only a few test posts, so it's important to be careful about checking every query.\nWhen writing database queries or post queries, always include an upper limit. If you need to get every item, reconsider the need to do so first, and whether you can change the process altogether. Unbounded queries are fine when you're only working with a few items in the database, but present problems as the site scales. (They can be difficult to debug as well, as the site may just go down for no reason in the middle of the night; just ask Ryan about downtime during the retreat.)\nIf you can do so, rethink the way you're storing or presenting data in the first place. You may be able to present pagination to the user instead, or use an infinite scroll technique to load items in batches instead.",
+    "_sample_id": 76
+  },
+  {
+    "question": "What should we have to enable plugins to work coherently?",
+    "target_chunk_id": "how-we-work_philosophy_completion_chunk_4",
+    "target_document_id": "how-we-work_philosophy_completion",
+    "expected_output": "## What's the alternative?\nWe can't possibly write code to handle every potential use case, so instead we should encourage a large ecosystem around our plugins. To enable plugins to work coherently, we need to make sure they're as extensible as WordPress core itself. In addition, we should have a resources page that lists other available plugins, and promotes them as much as possible.",
+    "_sample_id": 77
+  },
+  {
+    "question": "What does this code snippet do?",
+    "target_chunk_id": "standards_performance_chunk_9",
+    "target_document_id": "standards_performance",
+    "expected_output": "    foreach ( $items as $index => $item ) {\n        if ( $item === $value ) {\n            return $index;\n        }\n    }\n    return null;\n}\n```",
+    "_sample_id": 78
+  },
+  {
+    "question": "What is the purpose of using the `prop-types` module in React?",
+    "target_chunk_id": "how-we-work_style_react_chunk_19",
+    "target_document_id": "how-we-work_style_react",
+    "expected_output": "### Use [propTypes](https://href.li/?https://github.com/facebook/prop-types)\nThe `prop-types` npm module is used to declare the properties that a React component expects or needs to receive in order to render properly. Properties may be restricted to a specific type or set of types, marked as required, or even deeply checked against a specific object structure.\nTo use PropTypes, install and import the `prop-types` package to your React component, then add a `.propTypes` property to that component:\n```\nimport PropTypes from 'prop-types';\nimport React, { PureComponent } from 'react';\n\nclass MyComponent extends PureComponent {}\n\nMyComponent.propTypes = {\n    // Declare propTypes here\n};\n```\nEvery React component should specify `propTypes` for all properties it may receive: if it exists in `this.props`, it should have a `propTypes` declaration. This raises data errors early during development, and avoids edge cases related to type issues in production.\n```\nMyComponent.propTypes = {\n    // You can declare that a prop is a specific JS primitive.\n    // By default, propTypes arguments are optional:\n    optionalArray: PropTypes.array,\n    optionalBool: PropTypes.bool,",
+    "_sample_id": 79
+  },
+  {
+    "question": "How can overusing Sass functionality negatively impact a codebase?",
+    "target_chunk_id": "standards_style_css_chunk_23",
+    "target_document_id": "standards_style_css",
+    "expected_output": "## Writing Sass\nSass can be an incredibly powerful tool on large projects. Things like variables, partials, and mixins help us write more maintainable CSS. However it is important to remember 2 things.\n* Be aware of the CSS that is created by the SASS you write.\n* Just because SASS has lots of cool functionality, be wary of overusing it! Otherwise you may end up with a codebase that is difficult to maintain and hard for other developers to get their heads around!",
+    "_sample_id": 80
+  },
+  {
+    "question": "When is caching not a suitable solution for expensive operations?",
+    "target_chunk_id": "standards_performance_chunk_10",
+    "target_document_id": "standards_performance",
+    "expected_output": "### Cache Expensive Operations\nIf an operation is inherently complex or slow, you can cache the result. This reduces the operation in all but the worst-case to a cache lookup, which is a constant-time operation.\nThis is usually a sensible solution if the result doesn't change often (for example, child post counts only change if a post is updated). If the result changes often, you may need to come up with a different solution, as the cache hit rate may not be great.",
+    "_sample_id": 81
+  },
+  {
+    "question": "What are the specific formatting rules for CSS declarations in the preferred code style?",
+    "target_chunk_id": "how-we-work_style_css_chunk_2",
+    "target_document_id": "how-we-work_style_css",
+    "expected_output": "## Basic Styles\nThere are several overarching style rules which should be kept to for the sake of consistency across projects.\nLet's look at some basic examples:\n```\n// Avoid\n.foo, .baz, .bar{\n    color: #000000; background-color: linear-gradient(to bottom, #ffffff, #cccccc);\n    font-size: 16px; font-family: Helvetica Neue, sans-serif }\n.foo-bar{/* … */}\n\n// Prefer\n.foo,\n.baz,\n.bar {\n    color: #000;\n    background-color: linear-gradient( to bottom, #fff, #ccc );\n    font-size: 1rem;\n    font-family: \"Helvetica Neue\", sans-serif;\n}\n\n.foo-bar { /* … */ }\n```\n**Note several features about the above preferred code style**\n* Each selector is on its own line\n* There is a space before the opening `{`\n* The trailing `}` is on its own line\n* Each declaration is on its own line\n* Each declaration has an ending semicolon, even the last in the set\n* There is one blank line between selector sets\n* Double quotes around values\n* Spacing inside parenthesis\nUnless stated, we follow the [WordPress CSS coding standards](https://href.li/?https://make.wordpress.org/core/handbook/best-practices/coding-standards/css/).",
+    "_sample_id": 82
+  },
+  {
+    "question": "What are the limitations of current state-of-the-art automated testing for frontend accessibility?",
+    "target_chunk_id": "guides_testing_accessibility_chunk_6",
+    "target_document_id": "guides_testing_accessibility",
+    "expected_output": "## Frontend (DOM) validation\nAn overview of how to test the DOM for accessibility is given [in the Make WordPress Accessible Handbook](https://href.li/?https://make.wordpress.org/accessibility/handbook/test-for-web-accessibility/test-for-web-accessibility-frontend-code/).\nThis guide includes checks, tools and resources for:\n* Keyboard navigation\n* W3C and WCAG 2 AA validation\n* Setting up automated testing in the browser and the command line\n* Testing dynamic content with a screen reader\nAs frontend accessibility testing needs to run against the final generated DOM, tests must be run in a full browser. While automated DOM testing does exist, this often requires painful setup. Additionally, current state-of-the-art automated testing does not capture all errors; testing keyboard accessibility and announcing of dynamic changes by a screen reader cannot currently be automated.",
+    "_sample_id": 83
+  },
+  {
+    "question": "What are the key characteristics of the system?",
+    "target_chunk_id": "platform_deploys_chunk_2",
+    "target_document_id": "platform_deploys",
+    "expected_output": "### Secure, scalable, and flexible. Serving over 38 billion requests every year.\nKawasaki\nDigital Trends\nStandard Chartered\nKaplan\nDocebo\nNerdwallet",
+    "_sample_id": 84
+  },
+  {
+    "question": "Who made the comment?",
+    "target_chunk_id": "how-we-work_process_reviews_chunk_13",
+    "target_document_id": "how-we-work_process_reviews",
+    "expected_output": "### One comment\n1. **Matthew Haines-Young** says:\n[June 8, 2026 at 4:45 pm](https://engineering.hmn.md/how-we-work/process/reviews/#comment-24)\nShared by @matt in #eng-managers on Slack\nComments are closed.",
+    "_sample_id": 85
+  },
+  {
+    "question": "Who is primarily responsible for determining performance in code?",
+    "target_chunk_id": "standards_backend_performance_chunk_1",
+    "target_document_id": "standards_backend_performance",
+    "expected_output": "# Performance\nPerformance is very important with the scale of the sites we work on. If it's not performant, it cannot ship. However, it's important to be pragmatic; performance is a rabbit hole that you can spend infinite time on. Shipping mostly-performant code is better than not shipping, and you can always incrementally improve it later.\nDetermining what is or isn't performant is tough, and this role mostly falls on the code author. However, performance should also be checked during review, especially for external plugins that may not have been created with performance in mind.",
+    "_sample_id": 86
+  },
+  {
+    "question": "What are some potential issues with using static variables?",
+    "target_chunk_id": "standards_backend_best-practices_chunk_8",
+    "target_document_id": "standards_backend_best-practices",
+    "expected_output": "You may want to avoid `static` variables (which are not the same as static class properties), which are stored only in the context of the specific function. These can become tough to invalidate or otherwise manage during testing.",
+    "_sample_id": 87
+  },
+  {
+    "question": "What is the alternative to using the spread operator for object declarations?",
+    "target_chunk_id": "how-we-work_style_js_chunk_13",
+    "target_document_id": "how-we-work_style_js",
+    "expected_output": "### Other Object Enhancements\nIn addition to the spread operator, object declarations now support computed property names:\n```\n// Avoid:\nconst obj = {};\nobj[ someDynamicKeyName ] = 'value';\n\n// Prefer:\nconst objWithComputedPropertyName = {\n    [ someDynamicKeyName ]: 'value',\n};\n```\nA shorthand property syntax is also available to handle the common situation where an object key is assigned a variable with the same identifier:\n```\nconst title = getUserInput( 'title' );\nconst content = getUserInput( 'content' );\n\n// ES5:\n\nreturn {\n    title: title,\n    content: content,\n};\n\n// ES6:\n\nreturn {\n    title,\n    content,\n};\n```",
+    "_sample_id": 88
+  },
+  {
+    "question": "How does `trigger_error()` differ from `error_log()` in terms of functionality?",
+    "target_chunk_id": "standards_backend_error-logging_chunk_1",
+    "target_document_id": "standards_backend_error-logging",
+    "expected_output": "# Error Logging\nWith `error_log()` often being used for quick debug output, many code quality tools now flag these calls as forgotten debug statements. This is because `error_log()` is typically used by developers to dump state information directly to the log file, bypassing PHP's error handling system.\nA better alternative in many cases is the more versatile `trigger_error()` function. Unlike `error_log()`, it integrates with PHP's standard error handling, respects `error_reporting` and `display_errors`, and is caught by any registered `set_error_handler`. It also supports different error levels, such as `E_USER_NOTICE`, `E_USER_WARNING`, `E_USER_ERROR`, and `E_USER_DEPRECATED`, making it far more expressive than just logging a string.\nAdditionally, you might come across error messages wrapped in WordPress translation functions. This makes it harder to identify and resolve issues, since bug reports may contain translated messages we can't directly match in the codebase.\nEnd users should not see raw error messages anyway—developers should log or raise errors in a consistent, developer-focused way, and then provide a separate, user-friendly message when needed.\n---",
+    "_sample_id": 89
+  },
+  {
+    "question": "What is the recommended visibility keyword when a class method or property should be accessible by subclasses?",
+    "target_chunk_id": "how-we-work_style_php_chunk_12",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "## Visibility (Public/Protected/Private)\nClass methods and properties should always be marked with a visibility keyword, one of `public`, `protected` or `private`. Generally speaking, `private` should be avoided in favour of `protected`, as it doesn't allow subclasses to access the method. In most cases, this is an unnecessary hindrance, and leads to subclasses simply copy-and-pasting the code when they need to override it.\n```\n// No:\nclass MyClass {\n    var $foo = 1;\n    function __construct() {}\n}\n\n// Yes:\nclass MyClass {\n    protected $foo = 1;\n    public function __construct() {}\n}\n```",
+    "_sample_id": 90
+  },
+  {
+    "question": "What is the command to generate the POT file?",
+    "target_chunk_id": "guides_tooling_l10n_chunk_5",
+    "target_document_id": "guides_tooling_l10n",
+    "expected_output": "### Creating the POT File\nTo generate the POT file, open a Terminal window, and navigate to the root folder of your plugin or theme. Then run `wpi18n makepot`.\nAssuming that the code is translation-ready, you'll see that a `.pot` files has been created in the root directory.",
+    "_sample_id": 91
+  },
+  {
+    "question": "What is the preferred syntax for creating a new array in JavaScript?",
+    "target_chunk_id": "how-we-work_style_php_chunk_11",
+    "target_document_id": "how-we-work_style_php",
+    "expected_output": "## Array Creation\nWhen creating a new array, prefer the `[]` short-array syntax over the `array()` old-style syntax. This is more compact, and fits better with how JavaScript works. In addition, it can make it a little easier to read nested options arrays.\n```\n// No:\nget_posts( array(\n    'author_in' => array( 1, 2, 3 ),\n    'meta_query' => array(\n        'relation' => 'AND',\n        array(\n            'key' => '_my_meta',\n            'value' => '1'\n        ),\n    ),\n) );\n\n// Yes:\nget_posts( [\n    'author_in' => [ 1, 2, 3 ],\n    'meta_query' => [\n        'relation' => 'AND',\n        [\n            'key' => '_my_meta',\n            'value' => '1'\n        ],\n    ],\n] );\n```",
+    "_sample_id": 92
+  },
+  {
+    "question": "What is PHPUnit used for in WordPress testing?",
+    "target_chunk_id": "guides_testing_phpunit_chunk_1",
+    "target_document_id": "guides_testing_phpunit",
+    "expected_output": "# PHPUnit\nWriting tests can be tough, especially once WordPress gets involved. Let's do it together.\nMost tests you'll work on are written using PHPUnit, so let's work through getting started using PHPUnit. To start with, we're going to work with a very basic PHPUnit test which doesn't load WordPress, and work up to testing a plugin.\nYou can follow along with the steps here, or clone the repository which includes the parts we're writing here.\nIf you're using Chassis for local development, you'll want to install the [Tester extension](https://href.li/?https://github.com/Chassis/Tester). This will make PHPUnit available inside your VM, and automatically configure environment variables for WordPress testing.\nIf you're **not** using Chassis, you need to make sure you have [PHPUnit](https://href.li/?https://phpunit.de/) installed and available on your path.\nThe first step to getting started is to write a test class. PHPUnit uses class-based tests, which load the class up, then run every method named `test_...()`. If this method runs successfully, the test passes.",
+    "_sample_id": 93
+  },
+  {
+    "question": "What are the default prop types for the optional properties in the provided code?",
+    "target_chunk_id": "standards_style_react_chunk_20",
+    "target_document_id": "standards_style_react",
+    "expected_output": "    // By default, propTypes arguments are optional:\n    optionalArray: PropTypes.array,\n    optionalBool: PropTypes.bool,\n    optionalFunc: PropTypes.func,\n    // Mark required properties with .isRequired:\n    requiredString: PropTypes.string.isRequired,\n    requiredObject: PropTypes.shape( {\n        rendered: PropTypes.string.isRequired,\n    } ).isRequired,\n};\n```\nAvoid duplicating child `propTypes`. If you are passing data through to a child component, you can refer to that component's `.propTypes` property to avoid re-declaring the same definitions:\n```\nParentComponent.propTypes = {\n    titleForChild: ChildComponent.propTypes.title,\n};\n```\nIf you have a `propTypes` definition that is used across many components such as the shape of a specific API object, you may move that into a module of its own and import that module into each component where it is used to keep the definitions in sync.\n`propTypes` can only do their job if they are specific. Avoid these non-descriptive prop-types:\n* `PropTypes.any`\n* `PropTypes.array`\n* `PropTypes.object`\nInstead, use\n* `PropTypes.arrayOf`\n* `PropTypes.objectOf`\n* `PropTypes.instanceOf`\n* `PropTypes.shape`",
+    "_sample_id": 94
+  },
+  {
+    "question": "Where can reviewers find specific guidelines for accessibility best practices?",
+    "target_chunk_id": "how-we-work_process_reviews_chunk_8",
+    "target_document_id": "how-we-work_process_reviews",
+    "expected_output": "### Accessibility\nOur work should be usable and accessible for as many users as possible. Reviewers should check for obviously inaccessible patterns.\nFor specific guidelines, consult the [accessibility best practices](/standards/frontend/best-practices/).",
+    "_sample_id": 95
+  },
+  {
+    "question": "What is the main reason for keeping JavaScript hooks separate from styles?",
+    "target_chunk_id": "how-we-work_style_css_chunk_13",
+    "target_document_id": "how-we-work_style_css",
+    "expected_output": "### JavaScript hooks\nJavaScript hooks should be kept separate from those used for styles. This allows future developers to move the JavaScript behaviour without the need to modify the CSS.\nOur preference is for JavaScript hooks to make use of data attributes, eg `[data-lightbox]`. See the [JavaScript style guide](/how-we-work/style/js/) for further details.\nIf a JavaScript component must use a class, it should remain separate from styles and be prefixed with `js-`.",
+    "_sample_id": 96
+  },
+  {
+    "question": "What does the CSS class screen-reader-text explain?",
+    "target_chunk_id": "how-we-work_style_markup_chunk_3",
+    "target_document_id": "how-we-work_style_markup",
+    "expected_output": "## screen-reader-text class\nThis class is used to hide content from screen but not from screen readers and search engines.\n[The CSS class screen-reader-text](https://href.li/?https://make.wordpress.org/accessibility/handbook/best-practices/markup/the-css-class-screen-reader-text/) explains why and how and gives the most recent CSS properties used for WordPress core.",
+    "_sample_id": 97
+  },
+  {
+    "question": "What are the advantages of using a taxonomy to handle one-to-many relationships for posts?",
+    "target_chunk_id": "how-we-work_process_architecture_chunk_25",
+    "target_document_id": "how-we-work_process_architecture",
+    "expected_output": "### One to Many Relationships for Posts\nWhen a post needs to be able to be linked to multiple other posts, a possible approach is to use a taxonomy that shadows the post type.\nThis means that whenever a new post is created, a term in the shadow taxonomy is created. The term name and slug should correspond to the post title and slug, so that display elements and queries can be handled easily.\nIn practice this means implementing custom create, read, update, and delete functions for the terms in the shadow taxonomy that mimic these operations on posts.\nThis approach has the advantage that term queries are very fast, and you do not need to worry about any main queries to be impacted.\nHowever the downside here is that posts do support features that taxonomies do not support. Posts can be hidden from the public, but be visible to logged-in users, terms cannot. In addition deleted posts are placed in the trash, whereas terms are deleted immediately.\nWhatever your implementation is, it needs to account for this differences in content handling.",
+    "_sample_id": 98
+  },
+  {
+    "question": "What are the primary concerns when deciding whether to adhere to HM Coding Standards?",
+    "target_chunk_id": "how-we-work_philosophy_chunk_5",
+    "target_document_id": "how-we-work_philosophy",
+    "expected_output": "## Avoid exceptionalism\n* Not everything needs to adhere to HM Coding Standards, consistency is more important\n* Just because a plugin uses patterns or a code style you don't like doesn't mean it can't provide value\n* While it's tempting to solve a problem from scratch the way you think is best, consider the long term. Contributing to existing work can have a much wider impact",
+    "_sample_id": 99
+  }
+]

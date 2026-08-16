@@ -6,11 +6,7 @@ not burning API calls on all ~1100 questions. Re-running with the same
 comparable across runs.
 
 Usage:
-    python -m src.eval.sample_ground_truth \\
-        --ground-truth data/evaluation/ground_truth_augmented.json \\
-        --sample-size 100 \\
-        --seed 42 \\
-        --out eval_data/ground_truth_sample.json
+    python -m src.evaluation.sample_ground_truth --ground-truth data/gt/ground_truth.json --sample-size 100 --seed 42 --out data/gt/ground_truth_sample.json
 """
 
 import argparse

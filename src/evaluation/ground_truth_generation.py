@@ -20,7 +20,7 @@ from tqdm import tqdm
 MODEL_NAME = "llama-3.1-8b-instant"
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_INPUT_PATH = PROJECT_ROOT / "data" / "processed" / "hmn_engineering_docs" / "chunked_documents.json"
-DEFAULT_OUTPUT_PATH = PROJECT_ROOT / "data" / "ground_truth.json"
+DEFAULT_OUTPUT_PATH = PROJECT_ROOT / "data" / "gt" / "ground_truth.json"
 
 PROMPT_TEMPLATE = """You are an AI assistant helping generate evaluation data.
 Based on the text below, generate exactly 2 concise, human-like questions answered directly by the content.
