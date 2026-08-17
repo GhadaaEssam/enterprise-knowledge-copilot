@@ -192,7 +192,7 @@ The cleaning process:
 The Cleaning script is available in:
 
 ```text
-src/ingestion/scraper.py
+src/ingestion/cleaner.py
 ```
 
 Preserving Markdown structure is important because headings, lists, and code examples often contain important semantic information for retrieval.
@@ -208,6 +208,12 @@ The goal is to create chunks that are:
 * Small enough for efficient retrieval
 * Large enough to preserve meaningful context
 * Structured around the original Markdown content
+
+The Chunking script is available in:
+
+```text
+src/ingestion/chunker.py
+```
 
 Each chunk retains metadata such as its document, title, category, and source.
 
@@ -271,13 +277,13 @@ Generate the ground-truth questions used for retrieval evaluation with:
 uv run python -m src.evaluation.ground_truth_generation
 ```
 
-It reads the chunked documents and creates/resumes `data/ground_truth.json`.
+It reads the chunked documents and creates/resumes `data/gt/ground_truth.json`.
 Set `GROQ_API_KEY` in `.env` before running it.
 
-The evaluation is available in:
+The retrieval evaluation script is:
 
 ```text
-notebooks/retrieval_evaluation.ipynb
+src/evaluation/search_evaluation.py
 ```
 
 Two retrieval metrics were used.
@@ -298,17 +304,17 @@ A higher MRR means relevant results tend to appear closer to the top.
 
 | Retrieval Engine         | Hit Rate@5 |      MRR@5 |
 | ------------------------ | ---------: | ---------: |
-| **KeywordSearchEngine**  | **0.9089** | **0.7333** |
-| SqliteVectorSearchEngine |     0.7936 |     0.6210 |
-| HybridSearchEngine       |     0.8934 |     0.7011 |
+| **KeywordSearchEngine**  | **0.9188** | **0.7452** |
+| SqliteVectorSearchEngine |     0.7799 |     0.6138 |
+| HybridSearchEngine       |     0.8757 |     0.6381 |
 
 ### Selected Retrieval Strategy
 
 `KeywordSearchEngine` was selected for the final system because it achieved the best performance on both metrics:
 
 ```text
-Hit Rate@5 = 90.89%
-MRR@5      = 73.33%
+Hit Rate@5 = 91.88%
+MRR@5      = 74.52%
 ```
 
 The hybrid approach also performed strongly, but keyword search achieved the highest retrieval performance on this particular documentation dataset.
@@ -426,17 +432,18 @@ src/evaluation/evaluate.py
 The generated evaluation report is stored at:
 
 ```text
-eval_data/eval_report.json
+data/results/llm_eval_report.json
 ```
 
 ---
 
 # 📊 LLM Evaluation Methodology
 
-Two independent evaluation dimensions are used:
+Three independent evaluation dimensions are used:
 
 1. Correctness
 2. Groundedness
+3. Context relevance
 
 ---
 
@@ -500,14 +507,61 @@ This is particularly important for a RAG system because an answer can be factual
 
 ---
 
+## Context Relevance
+
+Context relevance evaluates whether the retrieved context is actually useful for answering the user's question.
+
+The judge compares:
+
+```text
+User Question
+       ↓
+Retrieved Context
+```
+
+The judge is instructed to score whether the retrieved documentation contains the information needed to answer the question, and whether irrelevant or missing context affects usefulness.
+
+The scoring criteria are:
+
+```text
+5 = The retrieved context is directly relevant and contains the information
+    needed to answer the question
+
+4 = Mostly relevant, with only a small amount of irrelevant information or
+    minor missing context
+
+3 = Some relevant information is present, but substantial irrelevant or
+    missing information remains
+
+2 = Mostly irrelevant context; only a small portion is potentially useful
+
+1 = The context is empty, irrelevant, or does not help answer the question
+```
+
+This helps separate retrieval quality from answer quality. An answer can be poorly written even when retrieval found the right evidence, or it can look convincing while being based on weak or irrelevant context.
+
+---
+
 # 📈 LLM Evaluation Results
 
 The evaluation was run against 100 test cases.
 
-| Metric       |         Mean | Minimum | Scored | Missing |
-| ------------ | -----------: | ------: | -----: | ------: |
-| Correctness  | **2.78 / 5** |       1 |     99 |       1 |
-| Groundedness | **3.53 / 5** |       1 |     98 |       2 |
+| Metric            |         Mean | Minimum | Scored | Missing |
+| ----------------- | -----------: | ------: | -----: | ------: |
+| Correctness       | **4.18 / 5** |       1 |     97 |       3 |
+| Groundedness      | **3.73 / 5** |       1 |     96 |       4 |
+| Context relevance | **4.35 / 5** |       1 |     96 |       4 |
+
+Tool-selection results:
+
+| Metric                      | Value |
+| --------------------------- | ----: |
+| Tool-selection accuracy     |  0.97 |
+| Correct tool selections     | 97/100 |
+| Internal search usage rate  |  0.97 |
+| Web search usage rate       |  0.03 |
+| No tool called rate         |  0.03 |
+| Unnecessary web search rate |  0.03 |
 
 The missing scores were caused by **evaluation/LLM limit errors**, rather than missing test cases.
 
@@ -515,9 +569,13 @@ The missing scores were caused by **evaluation/LLM limit errors**, rather than m
 
 The results provide a useful baseline for the system.
 
-The groundedness score of **3.53/5** indicates that the retrieved context generally contributes meaningful support to the generated answers.
+The correctness score of **4.18/5** indicates that the agent usually answers with the key facts from the expected documentation answer.
 
-The correctness score of **2.78/5** indicates that there is still significant room for improving final answer quality.
+The groundedness score of **3.73/5** indicates that most answers are supported by retrieved context, while some still include unsupported or weakly supported claims.
+
+The context relevance score of **4.35/5** indicates that retrieval usually provides useful evidence for the final answer.
+
+The tool-selection accuracy of **97%** shows that the agent generally chooses the appropriate search path, with limited unnecessary web-search usage.
 
 This gives a measurable baseline for future improvements to:
 
@@ -638,27 +696,19 @@ enterprise-knowledge-copilot/
 ├── data/
 │   ├── db/
 │   ├── embeddings/
-│   │   └── embeddings.npy
-│   ├── evaluation/
-│   │   ├── ground_truth.json
-│   │   └── ground_truth_augmented.json
-│   ├── monitoring/
-│   ├── notebooks/
-│   ├── processed/
-│   │   ├── chunked_documents.json
-│   │   ├── cleaned_documents.json
 │   │   └── hmn_engineering_docs/
+│   ├── gt/
+│   │   ├── ground_truth.json
+│   │   ├── ground_truth_sample.json
+│   │   └── generations.json
+│   ├── monitoring/
+│   ├── processed/
+│   │   └── hmn_engineering_docs/
+│   ├── results/
+│   │   ├── llm_eval_report.json
+│   │   └── retrieval_metrics.csv
 │   └── raw/
 │       └── hmn_engineering_docs/
-│
-├── eval_data/
-│   ├── eval_report.json
-│   ├── generations.json
-│   └── ground_truth_sample.json
-│
-├── notebooks/
-│   ├── main.ipynb
-│   └── retrieval_evaluation.ipynb
 │
 ├── src/
 │   ├── __init__.py
@@ -668,13 +718,11 @@ enterprise-knowledge-copilot/
 │   │   └── prompt.py
 │   │
 │   ├── evaluation/
-│   │   ├── boost_fields_tuning.py
 │   │   ├── evaluate.py
 │   │   ├── generate_answers.py
-│   │   ├── gt_generation.py
+│   │   ├── ground_truth_generation.py
 │   │   ├── judge.py
 │   │   ├── judge_prompts.py
-│   │   ├── retry_failed.py
 │   │   ├── sample_ground_truth.py
 │   │   └── search_evaluation.py
 │   │
@@ -685,8 +733,6 @@ enterprise-knowledge-copilot/
 │   │   ├── embed/
 │   │   ├── embedder.py
 │   │   ├── embedding.py
-│   │   ├── loader.py
-│   │   ├── models/
 │   │   ├── pipeline.py
 │   │   └── scraper.py
 │   │
@@ -697,8 +743,9 @@ enterprise-knowledge-copilot/
 │   │
 │   ├── retrieval/
 │   │   ├── __init__.py
+│   │   ├── index_builder.py
+│   │   ├── keyword_search.py
 │   │   ├── search_engines.py
-│   │   ├── text_search.py
 │   │   └── vector_search.py
 │   │
 │   └── tools/
@@ -722,7 +769,7 @@ enterprise-knowledge-copilot/
 * **Groq** — LLM API
 * **OpenAI-compatible LLM interface** — agent interaction
 * **DDGS** — web search
-* **BeautifulSoup / Crawl4AI** — documentation ingestion
+* **BeautifulSoup / requests** — documentation ingestion
 * **Markdownify** — HTML to Markdown conversion
 * **uv** — dependency and environment management
 * **Docker / Docker Compose** — containerization
@@ -838,13 +885,13 @@ http://localhost:8501
 
 ## Retrieval Evaluation
 
-The retrieval experiments can be found in:
+Run the retrieval evaluation with:
 
-```text
-notebooks/retrieval_evaluation.ipynb
+```bash
+uv run python -m src.evaluation.search_evaluation --output data/results/retrieval_metrics.csv
 ```
 
-The notebook evaluates:
+The script evaluates:
 
 ```text
 Keyword Search
@@ -865,16 +912,22 @@ The best-performing approach is then selected for the final application.
 
 ## LLM Evaluation
 
-Run the LLM evaluation using:
+Generate agent answers from the sampled ground truth:
 
-```text
-src/evaluation/evaluate.py
+```bash
+uv run python -m src.evaluation.generate_answers --sample data/gt/ground_truth_sample.json --out data/gt/generations.json
+```
+
+Then run the LLM evaluation:
+
+```bash
+uv run python -m src.evaluation.evaluate --generations data/gt/generations.json --out data/results/llm_eval_report.json --judge-model llama-3.3-70b-versatile
 ```
 
 The evaluation produces:
 
 ```text
-eval_data/eval_report.json
+data/results/llm_eval_report.json
 ```
 
 The Streamlit evaluation page reads this report and displays:

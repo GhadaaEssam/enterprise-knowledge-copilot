@@ -25,8 +25,15 @@ INTERNAL_SEARCH_SCHEMA = {
                         "to search within internal documentation."
                     ),
                 },
+                "num_results": {
+                    "type": "integer",
+                    "description": (
+                        "Optional number of results to return. "
+                        "Defaults to 5."
+                    ),
+                },
             },
-            "required": ["query"],
+            "required": [],
         },
     },
 }
@@ -52,8 +59,15 @@ WEB_SEARCH_SCHEMA = {
                         "to search on the web."
                     ),
                 },
+                "num_results": {
+                    "type": "integer",
+                    "description": (
+                        "Optional number of results to return. "
+                        "Defaults to 5."
+                    ),
+                },
             },
-            "required": ["query"],
+            "required": [],
         },
     },
 }

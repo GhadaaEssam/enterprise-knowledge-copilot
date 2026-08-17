@@ -22,7 +22,7 @@ from src.retrieval.search_engines import (  # noqa: E402
 )
 
 DEFAULT_COLLECTION = "hmn_engineering_docs"
-DEFAULT_GROUND_TRUTH_PATH = PROJECT_ROOT / "data" / "ground_truth.json"
+DEFAULT_GROUND_TRUTH_PATH = PROJECT_ROOT / "data" / "gt" / "ground_truth.json"
 DEFAULT_DB_DIR = PROJECT_ROOT / "data" / "db"
 DEFAULT_MODEL_PATH = (
     PROJECT_ROOT

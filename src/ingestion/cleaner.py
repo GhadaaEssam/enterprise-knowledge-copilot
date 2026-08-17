@@ -6,7 +6,7 @@ from typing import Dict, Any, List
 
 RAW_DIR = Path("data/raw/hmn_engineering_docs")
 PROCESSED_DIR = Path("data/processed/hmn_engineering_docs")
-OUTPUT_JSON = Path("data/processed/cleaned_documents.json")
+OUTPUT_JSON = PROCESSED_DIR / "cleaned_documents.json"
 
 def clean_rag_text(text: str) -> str:
     if not text:

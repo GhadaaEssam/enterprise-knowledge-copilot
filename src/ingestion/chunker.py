@@ -4,8 +4,8 @@ from pathlib import Path
 from typing import Dict, Any, List
 
 # File Paths
-INPUT_JSON = Path("data/processed/cleaned_documents.json")
-OUTPUT_JSON = Path("data/processed/chunked_documents.json")
+INPUT_JSON = Path("data/processed/hmn_engineering_docs/cleaned_documents.json")
+OUTPUT_JSON = Path("data/processed/hmn_engineering_docs/chunked_documents.json")
 
 # Chunking Limits
 MAX_CHUNK_CHAR_SIZE = 1200  # Fallback soft limit for very long sections

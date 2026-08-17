@@ -17,7 +17,7 @@ class KnowledgeAgent:
         self,
         tool_registry,
         llm_client,
-        model: str = "openai/gpt-oss-120b",
+        model: str = "openai/gpt-oss-20b",
         instructions: str = SYSTEM_INSTRUCTIONS,
         max_iterations: int = 4,
         tracker=None,

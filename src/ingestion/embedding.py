@@ -13,10 +13,11 @@ from src.ingestion.embedder import Embedder
 
 SRC_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = SRC_DIR.parent.parent
-INPUT_CHUNKED_JSON = PROJECT_ROOT / "data/processed/chunked_documents.json"
-OUTPUT_EMBEDDINGS_NPY = PROJECT_ROOT / "data/embeddings/embeddings.npy"
-OUTPUT_METADATA_PKL = PROJECT_ROOT / "data/embeddings/embedding_metadata.pkl"
-MODEL_PATH = SRC_DIR / "models" / "Xenova" / "all-MiniLM-L6-v2"
+DEFAULT_COLLECTION = "hmn_engineering_docs"
+INPUT_CHUNKED_JSON = PROJECT_ROOT / "data" / "processed" / DEFAULT_COLLECTION / "chunked_documents.json"
+OUTPUT_EMBEDDINGS_NPY = PROJECT_ROOT / "data" / "embeddings" / DEFAULT_COLLECTION / "embeddings.npy"
+OUTPUT_METADATA_PKL = PROJECT_ROOT / "data" / "embeddings" / DEFAULT_COLLECTION / "embedding_metadata.pkl"
+MODEL_PATH = SRC_DIR / "embed" / "models" / "Xenova" / "all-MiniLM-L6-v2"
 
 
 def generate_onnx_embeddings(

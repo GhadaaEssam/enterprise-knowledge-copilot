@@ -16,9 +16,7 @@ rate limit or the process dies at question 63/100, re-running the same
 command picks up at 63 instead of starting over.
 
 Usage:
-    python -m src.eval.generate_answers \\
-        --sample eval_data/ground_truth_sample.json \\
-        --out eval_data/generations.json
+    python -m src.evaluation.generate_answers --sample data/gt/ground_truth_sample.json --out data/gt/generations.json
 """
 
 import argparse

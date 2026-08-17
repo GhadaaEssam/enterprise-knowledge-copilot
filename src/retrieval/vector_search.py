@@ -8,7 +8,7 @@ from pathlib import Path
 def build_vsqlitesearch_index(
     documents: List[Dict[str, Any]], 
     vectors: np.ndarray, 
-    db_path: str | Path = "hnm_vectors.db",
+    db_path: str | Path = "data/db/hmn_engineering_docs_vector.db",
     mode: str = "ivf",
     overwrite: bool = True
 ) -> VectorSearchIndex:

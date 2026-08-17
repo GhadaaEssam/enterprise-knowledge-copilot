@@ -8,63 +8,6 @@ what a "3" means -- this is what keeps LLM-judge scores reproducible
 across runs and comparable across agent versions.
 """
 
-TOOL_SELECTION_JUDGE_PROMPT = """You are auditing whether an AI agent followed its OWN tool-routing rules.
-
-The agent's system prompt defines this routing policy:
-- Use `search_internal_documentation` for company processes, coding standards, \
-tools, architecture, or project specs (this is the default for anything company-related).
-- Use `search_web` ONLY for general public knowledge, external tech news, current \
-public events, or third-party docs not covered internally.
-
-USER QUESTION:
-{question}
-
-TOOLS THE AGENT ACTUALLY CALLED (in order):
-{tool_calls_summary}
-
-Judge whether the tool(s) chosen -- and the ORDER/whether internal was tried first \
-where relevant -- match the routing policy above, given the question. Do not judge \
-answer quality, only tool choice.
-
-Score 1-5:
-5 = Correct tool(s), correct order, no unnecessary calls
-4 = Correct tool(s), minor inefficiency (e.g. one redundant call) but no policy violation
-3 = Defensible choice but policy is ambiguous for this question OR internal search \
-skipped when it arguably should have been tried first
-2 = Wrong primary tool for this question type (e.g. web search used for an internal \
-company topic, or vice versa)
-1 = No tool called when one was clearly needed, or tool choice actively contradicts policy
-
-Respond with ONLY this JSON, no other text:
-{{"score": <int 1-5>, "reasoning": "<one or two sentences>"}}
-"""
-
-RETRIEVAL_RELEVANCE_JUDGE_PROMPT = """You are auditing the RELEVANCE of retrieved content, \
-not the final answer.
-
-SEARCH QUERY SENT TO THE TOOL:
-{query}
-
-TOOL: {tool_name}
-
-CONTENT RETURNED:
-{tool_output}
-
-Judge how relevant the retrieved content is to the query. Ignore whether the final \
-answer used it well -- only judge whether a competent researcher would consider this \
-retrieval useful for the query.
-
-Score 1-5:
-5 = Highly relevant, directly answers or strongly supports the query
-4 = Mostly relevant, some tangential content mixed in
-3 = Partially relevant, would need significant filtering to be useful
-2 = Mostly irrelevant, only superficial keyword overlap
-1 = Irrelevant or empty/error result
-
-Respond with ONLY this JSON, no other text:
-{{"score": <int 1-5>, "reasoning": "<one or two sentences>"}}
-"""
-
 GROUNDEDNESS_JUDGE_PROMPT = """You are a fact-checker. Compare the agent's final answer \
 against ONLY the retrieved context below. Flag any claim in the answer that is NOT \
 supported by the context.
@@ -116,23 +59,37 @@ Respond with ONLY this JSON, no other text:
 {{"score": <int 1-5>, "reasoning": "<one or two sentences, name what's missing or wrong if any>"}}
 """
 
-HELPFULNESS_JUDGE_PROMPT = """You are judging whether an answer actually helps the user, \
-per the agent's own formatting rules: lead with the direct answer, be concise, use \
-structure (bullets/tables) where useful, cite sources when facts came from tools.
+CONTEXT_RELEVANCE_JUDGE_PROMPT = """
+You are evaluating the relevance of retrieved context for an enterprise
+knowledge assistant.
+
+Determine whether the retrieved context is actually useful for answering
+the user's question.
 
 USER QUESTION:
+
 {question}
 
-AGENT'S FINAL ANSWER:
-{answer}
+RETRIEVED CONTEXT:
+
+{retrieved_context}
 
 Score 1-5:
-5 = Directly and completely answers the question, well-formatted, cites sources where expected
-4 = Answers the question, minor formatting or completeness gaps
-3 = Partially answers, or answers correctly but format/citation rules ignored
-2 = Vague, evasive, or only tangentially addresses the question
-1 = Does not answer the question at all, or answer is incoherent
+
+5 = The retrieved context is directly relevant and contains the information
+    needed to answer the question.
+
+4 = Mostly relevant, with only a small amount of irrelevant information or
+    minor missing context.
+
+3 = Some relevant information is present, but substantial irrelevant or
+    missing information remains.
+
+2 = Mostly irrelevant context; only a small portion is potentially useful.
+
+1 = The context is empty, irrelevant, or does not help answer the question.
 
 Respond with ONLY this JSON, no other text:
-{{"score": <int 1-5>, "reasoning": "<one or two sentences>"}}
+
+{{"score": <int 1-5>, "reasoning": "<one or two sentences explaining why the context is or is not relevant>"}}
 """

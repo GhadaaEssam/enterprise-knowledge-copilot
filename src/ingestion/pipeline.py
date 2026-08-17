@@ -56,7 +56,7 @@ class IngestionPipeline:
         self.chunks_path = self.processed_dir / "chunked_documents.json"
         self.embeddings_path = self.embeddings_dir / "embeddings.npy"
         self.metadata_path = self.embeddings_dir / "embedding_metadata.pkl"
-        self.model_path = Path(model_path or Path(__file__).parent / "models" / "Xenova" / "all-MiniLM-L6-v2")
+        self.model_path = Path(model_path or Path(__file__).parent / "embed" / "models" / "Xenova" / "all-MiniLM-L6-v2")
 
     def run(self, *, cleanup: bool = True) -> IngestionResult:
         """Run all stages and return paths/counts for the persisted artifacts."""

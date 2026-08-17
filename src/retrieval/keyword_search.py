@@ -6,7 +6,7 @@ from sqlitesearch import TextSearchIndex
 
 def build_sqlitesearch_index(
     documents: List[Dict[str, Any]],
-    db_path: str | Path = "hnm.db",
+    db_path: str | Path = "data/db/hmn_engineering_docs_keyword.db",
     overwrite: bool = True,
 ) -> TextSearchIndex:
 

@@ -14,8 +14,9 @@ def load_evaluation_results() -> list[dict]:
 
     eval_path = (
         root_dir
-        / "eval_data"
-        / "eval_report.json"
+        / "data"
+        / "results"
+        / "llm_eval_report.json"
     )
 
     if not eval_path.exists():
@@ -36,19 +37,60 @@ def calculate_metrics(
 
     n_cases = len(results)
 
-    correctness = [
-        r["scores"]["correctness"]
+    def score_values(axis: str) -> list[float]:
+        return [
+            r["scores"][axis]
+            for r in results
+            if r.get("scores", {}).get(axis)
+            is not None
+        ]
+
+    correctness = score_values("correctness")
+    groundedness = score_values("groundedness")
+    context_relevance = score_values(
+        "context_relevance"
+    )
+
+    tool_results = [
+        r.get("tool_selection", {})
         for r in results
-        if r.get("scores", {}).get("correctness")
-        is not None
     ]
 
-    groundedness = [
-        r["scores"]["groundedness"]
-        for r in results
-        if r.get("scores", {}).get("groundedness")
-        is not None
+    tool_accuracy = [
+        r.get("accuracy")
+        for r in tool_results
+        if r.get("accuracy") is not None
     ]
+
+    correct_tool_count = sum(
+        1
+        for r in tool_results
+        if r.get("correct") is True
+    )
+
+    internal_search_count = sum(
+        1
+        for r in tool_results
+        if r.get("internal_search_used") is True
+    )
+
+    web_search_count = sum(
+        1
+        for r in tool_results
+        if r.get("web_search_used") is True
+    )
+
+    no_tool_count = sum(
+        1
+        for r in tool_results
+        if r.get("no_tool_called") is True
+    )
+
+    unnecessary_web_count = sum(
+        1
+        for r in tool_results
+        if r.get("unnecessary_web_search") is True
+    )
 
     return {
         "n_cases": n_cases,
@@ -71,6 +113,49 @@ def calculate_metrics(
 
         "groundedness_scored": len(
             groundedness
+        ),
+
+        "context_relevance_mean": (
+            sum(context_relevance)
+            / len(context_relevance)
+            if context_relevance
+            else None
+        ),
+
+        "context_relevance_scored": len(
+            context_relevance
+        ),
+
+        "tool_selection_accuracy": (
+            sum(tool_accuracy) / len(tool_accuracy)
+            if tool_accuracy
+            else None
+        ),
+
+        "correct_tool_count": correct_tool_count,
+
+        "internal_search_usage_rate": (
+            internal_search_count / n_cases
+            if n_cases
+            else None
+        ),
+
+        "web_search_usage_rate": (
+            web_search_count / n_cases
+            if n_cases
+            else None
+        ),
+
+        "no_tool_called_rate": (
+            no_tool_count / n_cases
+            if n_cases
+            else None
+        ),
+
+        "unnecessary_web_search_rate": (
+            unnecessary_web_count / n_cases
+            if n_cases
+            else None
         ),
 
     }
@@ -113,6 +198,65 @@ def render_metric_cards(
             ),
         )
 
+    with col4:
+        value = metrics["context_relevance_mean"]
+
+        st.metric(
+            "Context Relevance",
+            (
+                f"{value:.2f} / 5"
+                if value is not None
+                else "N/A"
+            ),
+        )
+
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        value = metrics["tool_selection_accuracy"]
+
+        st.metric(
+            "Tool Selection",
+            (
+                f"{value:.2%}"
+                if value is not None
+                else "N/A"
+            ),
+        )
+
+    with col2:
+        st.metric(
+            "Correct Tool Calls",
+            (
+                f"{metrics['correct_tool_count']}"
+                f" / {metrics['n_cases']}"
+            ),
+        )
+
+    with col3:
+        value = metrics["internal_search_usage_rate"]
+
+        st.metric(
+            "Internal Search Usage",
+            (
+                f"{value:.2%}"
+                if value is not None
+                else "N/A"
+            ),
+        )
+
+    with col4:
+        value = metrics["web_search_usage_rate"]
+
+        st.metric(
+            "Web Search Usage",
+            (
+                f"{value:.2%}"
+                if value is not None
+                else "N/A"
+            ),
+        )
+
 
 def render_score_distribution(
     results: list[dict],
@@ -137,7 +281,14 @@ def render_score_distribution(
         is not None
     ]
 
-    col1, col2 = st.columns(2)
+    context_relevance = [
+        r["scores"]["context_relevance"]
+        for r in results
+        if r.get("scores", {}).get("context_relevance")
+        is not None
+    ]
+
+    col1, col2, col3 = st.columns(3)
 
     with col1:
 
@@ -187,6 +338,82 @@ def render_score_distribution(
                 "No groundedness scores available."
             )
 
+    with col3:
+
+        st.markdown(
+            "**Context Relevance**"
+        )
+
+        if context_relevance:
+            df = pd.DataFrame(
+                {
+                    "Score": context_relevance
+                }
+            )
+
+            st.bar_chart(
+                df["Score"]
+                .value_counts()
+                .sort_index()
+            )
+
+        else:
+            st.info(
+                "No context relevance scores available."
+            )
+
+
+def render_tool_selection_summary(
+    metrics: dict,
+):
+    """Display aggregate tool-selection metrics."""
+
+    st.subheader(
+        "🧭 Tool Selection"
+    )
+
+    values = {
+        "Internal search usage": (
+            metrics["internal_search_usage_rate"]
+        ),
+        "Web search usage": (
+            metrics["web_search_usage_rate"]
+        ),
+        "No tool called": (
+            metrics["no_tool_called_rate"]
+        ),
+        "Unnecessary web search": (
+            metrics["unnecessary_web_search_rate"]
+        ),
+    }
+
+    df = pd.DataFrame(
+        [
+            {
+                "Metric": name,
+                "Rate": value,
+            }
+            for name, value in values.items()
+            if value is not None
+        ]
+    )
+
+    if df.empty:
+        st.info(
+            "No tool-selection metrics available."
+        )
+        return
+
+    st.dataframe(
+        df.assign(
+            Rate=df["Rate"].map(
+                lambda value: f"{value:.2%}"
+            )
+        ),
+        use_container_width=True,
+        hide_index=True,
+    )
+
 
 def render_evaluation_details(
     results: list[dict],
@@ -212,13 +439,13 @@ def render_evaluation_details(
             {},
         )
 
-        retrieval = result.get(
-            "retrieval",
+        reasoning = result.get(
+            "reasoning",
             {},
         )
 
-        reasoning = result.get(
-            "reasoning",
+        tool_selection = result.get(
+            "tool_selection",
             {},
         )
 
@@ -228,6 +455,10 @@ def render_evaluation_details(
 
         groundedness = scores.get(
             "groundedness"
+        )
+
+        context_relevance = scores.get(
+            "context_relevance"
         )
 
         with st.expander(
@@ -296,6 +527,66 @@ def render_evaluation_details(
                     ),
                 )
 
+            with col3:
+
+                st.metric(
+                    "Context Relevance",
+                    (
+                        f"{context_relevance} / 5"
+                        if context_relevance
+                        is not None
+                        else "N/A"
+                    ),
+                )
+
+            st.markdown(
+                "### 🧭 Tool Selection"
+            )
+
+            expected_tool = tool_selection.get(
+                "expected_tool",
+                "N/A",
+            )
+
+            actual_tools = tool_selection.get(
+                "actual_tools",
+                [],
+            )
+
+            col1, col2, col3 = st.columns(3)
+
+            with col1:
+                st.metric(
+                    "Expected Tool",
+                    expected_tool,
+                )
+
+            with col2:
+                st.metric(
+                    "Actual Tools",
+                    (
+                        ", ".join(actual_tools)
+                        if actual_tools
+                        else "None"
+                    ),
+                )
+
+            with col3:
+                correct = tool_selection.get(
+                    "correct"
+                )
+
+                st.metric(
+                    "Correct",
+                    (
+                        "Yes"
+                        if correct is True
+                        else "No"
+                        if correct is False
+                        else "N/A"
+                    ),
+                )
+
             # ------------------------------------------
             # Judge reasoning
             # ------------------------------------------
@@ -326,6 +617,34 @@ def render_evaluation_details(
                 )
             )
 
+            st.markdown(
+                "**Context Relevance**"
+            )
+
+            st.write(
+                reasoning.get(
+                    "context_relevance",
+                    "No reasoning available.",
+                )
+            )
+
+            tool_reasoning = reasoning.get(
+                "tool_selection",
+                {},
+            )
+
+            if tool_reasoning:
+                st.markdown(
+                    "**Tool Selection**"
+                )
+
+                st.write(
+                    tool_reasoning.get(
+                        "reason",
+                        "No reasoning available.",
+                    )
+                )
+
 
 def render_evaluation():
     """Render the complete evaluation page."""
@@ -350,7 +669,7 @@ def render_evaluation():
 
         st.info(
             "Run the evaluation pipeline first "
-            "to generate eval_data/eval_report.json."
+            "to generate data/results/llm_eval_report.json."
         )
 
         return
@@ -369,6 +688,13 @@ def render_evaluation():
     # Score distributions
     render_score_distribution(
         results
+    )
+
+    st.divider()
+
+    # Tool selection summary
+    render_tool_selection_summary(
+        metrics
     )
 
     st.divider()
